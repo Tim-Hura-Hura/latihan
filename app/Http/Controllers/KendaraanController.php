@@ -12,10 +12,6 @@ class KendaraanController extends Controller
 
 public function index()
 	{
-		if(!Session::get('login'))
-             {
-            return redirect('login');
-             }
 	
         $data = DB::select( DB::raw("SELECT * FROM kendaraan GROUP BY nopol ORDER by id asc"));
 
