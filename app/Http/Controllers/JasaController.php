@@ -12,10 +12,7 @@ class JasaController extends Controller
 
 public function index()
 	{
-		if(!Session::get('login'))
-             {
-            return redirect('login');
-             }
+
 		$data = DB::table('jasa')->get();
 		return view ('kasir/jasa',['data'=>$data]);   
  	}
