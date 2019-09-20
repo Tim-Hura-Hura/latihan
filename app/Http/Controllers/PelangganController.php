@@ -20,8 +20,9 @@ public function index()
 		$data = DB::table('tempat_servis')->where('status','KOSONG')->get();
 		return view('kasir/index',['data'=>$data],['no_urut'=>$no_urut]);
  	}
-
-
-
-   
+public function detail_pelanggan()
+	{
+		$data = DB::table('pelanggan')->get();
+		return view('kasir/pelanggan/detail_pelanggan',['data'=>$data]);
+	}
 }
