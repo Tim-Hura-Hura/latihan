@@ -7,3 +7,4 @@ Route::resource('kasir_kendaraan_detail', 'KendaraanController@detail');
 Route::resource('admin_detail_kendaraan_list', 'KendaraanController@admin_detail_kendaraan_list');
 Route::resource('kasir_jasa', 'JasaController');
 Route::resource('kasir_tempat_servis', 'Tempat_Servis_Controller');
+Route::resource('kasir_detail', 'PenjualanController@kasir_detail');
