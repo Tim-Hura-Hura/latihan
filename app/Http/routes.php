@@ -9,3 +9,4 @@ Route::resource('kasir_jasa', 'JasaController');
 Route::resource('kasir_tempat_servis', 'Tempat_Servis_Controller');
 Route::resource('kasir_detail', 'PenjualanController@kasir_detail');
 Route::resource('kasir_lane', 'LaneController');
+Route::resource('kasir_penjualan', 'PenjualanController');

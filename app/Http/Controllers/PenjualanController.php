@@ -9,6 +9,37 @@ use Alert;
 
 class PenjualanController extends Controller {
 
+    public function index() {
+
+
+
+        DB::table('penjualan')->get();
+        $generatePNJ = DB::select("SELECT concat('PNJ','_',DATE_FORMAT(NOW(), '%d%m%Y'),'_',nomor) AS id_nota from (select case  when nomor IS NULL THEN '001' ELSE  nomor end  AS nomor  from (SELECT right(1000+(max(RIGHT(id_nota,3))+1),3) as nomor FROM `penjualan` where tgl_masuk = CURRENT_DATE) abc) bca");
+        foreach ($generatePNJ as $value) {
+            $kode = $value->id_nota;
+        }
+        DB::table('penjualan')->get();
+        $generatePNJ2 = DB::select("SELECT concat('PNJ','_',DATE_FORMAT(NOW(), '%d%m%Y'),'_',nomor) AS id_nota from (select case  when nomor IS NULL THEN '001' ELSE  nomor end  AS nomor  from (SELECT right(1000+(max(RIGHT(id_nota,3))+1),3) as nomor FROM `penjualan` where tgl_masuk = CURRENT_DATE) abc) bca");
+        foreach ($generatePNJ2 as $value) {
+            $kode = $value->id_nota;
+        }
+        $detail = \App\detail_penjualan::where('id_nota',$kode)->get();
+        
+        $total = DB::select("SELECT DISTINCT sum(sub_total) as total FROM `detail_penjualan` where id_nota=:id_nota",['id_nota'=>$kode]);
+        foreach ($total as $value) {
+            $total_harga = $value->total;
+        }
+        if ($total_harga=="") {
+            # code...
+            $total_harga=0;
+        }
+         $listnopol = DB::select( DB::raw("SELECT nopol as listnopol FROM `kendaraan`  WHERE status !='SELESAI SERVIS'"));
+         $mekanik = DB::select( DB::raw("SELECT nama FROM `pegawai` as mekanik WHERE status= 'MEKANIK'"));
+         $barang = DB::select( DB::raw("SELECT nama_barang FROM `stok`"));
+         $jasa = DB::select( DB::raw("SELECT jenis_jasa FROM `jasa`"));
+        return view('kasir.penjualan',['generatePNJ'=>$generatePNJ,'generatePNJ2'=>$generatePNJ2,'detail'=>$detail,'total'=>$total_harga,'listnopol'=>$listnopol,'mekanik'=>$mekanik,'barang'=>$barang,'jasa'=>$jasa]);
+    }
+
      public function kasir_detail()
     {
 
