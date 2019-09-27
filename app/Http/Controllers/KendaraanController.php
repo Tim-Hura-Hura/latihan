@@ -31,6 +31,26 @@ public function index()
     	$data = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.id_tempat_servis,kendaraan.merek,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id where kendaraan.id='$id'"));
 		return view ('kasir/kendaraan/detail',['data'=>$data]);   
     }
+    public function edit($id)
+    {
+		$data = DB::table('kendaraan')->where('id',$id)->get();
+		return view ('kasir/kendaraan/edit',['data'=>$data]);   
+    }
 
-   
+  
+public function update(Request $request, $id)
+    {
+		
+		$nopol			= $request->nopol;
+		$no_mesin 		= $request->no_mesin;
+		$merek 			= $request->merek;
+		$tipe 			= $request->tipe;
+		$warna			= $request->warna;
+		$keluhan		= $request->keluhan;
+		$status			= $request->status;
+		
+		DB::table('kendaraan')->where('id',$id)->update(['nopol' => $nopol, 'no_mesin' => $no_mesin,  'status' => $status,'merek' => $merek, 'tipe' => $tipe, 'warna' => $warna, 'keluhan' => $keluhan]);
+		return redirect('kasir_kendaraan')->with(['success' => 'Data Berhasil Dirubah']);  
+    }
+
 }

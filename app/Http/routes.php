@@ -20,3 +20,6 @@ Route::get('ajax/generateKodeBarang/{id}', 'PenjualanController@ajaxGenerateData
 Route::get('ajax/generateKodeJasa/{id}', 'PenjualanController@ajaxGenerateDataKodeJasa');
 Route::post('ajax/tambahDetail', 'PenjualanController@ajaxTambahDetail');
 
+//ajak pelanggan
+Route::get('ajax/pelgenerateNopol/{id}', 'PelangganController@ajaxGenerateDataNopol');
+
