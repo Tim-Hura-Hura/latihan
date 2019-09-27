@@ -90,6 +90,120 @@ class PenjualanController extends Controller {
         return view ('kasir/detail',['data'=>$data,'pemasukan'=>$pemasukan,'pengeluaran'=>$pengeluaran,'hasil'=>$hasil,'pemasukan2'=>$pemasukan2,'pengeluaran2'=>$pengeluaran2,'tgl1'=>$tgl1,'tgl2'=>$tgl2]);  
     }
 
+    public function store(Request $request) {
+        //pending
+       
+        $id_nota = $request->id_nota;
+        $penerima = $request->penerima;
+        $mekanik = $request->mekanik;
+        $nopol = $request->nopol;
+        $total = $request->total;
+        $pending = $request->pending;
+
+        if ($pending=="false") {
+        $insert = DB::table('penjualan')->insert([
+            'id_nota' => $id_nota,
+            'nopol'=>$nopol,
+            'tgl_masuk'=>DB::raw('now()'),
+            'mekanik'=>$mekanik,
+            'penerima'=>$penerima,
+            'total_harga'=>$total,
+            'status'=>"PENDING"
+        ]);
+        
+        $update2 = DB::select("UPDATE kendaraan SET status = 'PENDING' WHERE nopol=:nopol ORDER BY id
+        DESC LIMIT 1",['nopol'=>$nopol]);
+        // $update2f = DB::select("DELETE FROM penjualan WHERE nopol=:nopol AND bayar is NULL ",['nopol'=>$nopol]);
+
+        }
+        else{
+
+        $update2 = DB::select("UPDATE kendaraan SET status = 'PENDING' WHERE nopol=:nopol ORDER BY id
+        DESC LIMIT 1",['nopol'=>$nopol]);
+        }
+        return 'ok';
+    }
+
+    public function edit($kode_barang) {
+        //  
+        $detail = \App\detail_penjualan::where('id_nota',$id_nota)->get();
+        return json_encode($detail);
+    }
+    public function generateDetail($id){
+        $detail = DB::select("SELECT * FROM `detail_penjualan` WHERE id_nota=:id",['id'=>$id]);
+        // $detail = DB::select("SELECT * FROM `detail_penjualan` WHERE id_nota='PNJ_18042019_001'");
+        return json_encode($detail);
+    }
+    public function update(Request $request, $id_nota) {
+
+        //
+
+        $id_nota    = $request->id_nota;
+        $penerima   = $request->penerima;
+        $mekanik    = $request->mekanik;
+        $nopol      = $request->nopol;
+        $total      = $request->total;
+        $pending    = $request->pending;
+        $bayar      = $request->bayar;
+        $kembalian  = $bayar-$total;
+
+        if ($pending=="true") {
+        $update = DB::select("UPDATE penjualan set total_harga=:total, penerima=:penerima, mekanik=:mekanik, bayar=:bayar, kembalian=:kembalian, tgl_keluar=NOW(), status='LUNAS' where id_nota=:id",['id'=>$id_nota,'bayar'=>$bayar,'kembalian'=>$kembalian,'total'=>$total,'penerima'=>$penerima,'mekanik'=>$mekanik]);
+
+        
+        $update12 = DB::select("UPDATE tempat_servis INNER JOIN kendaraan ON tempat_servis.id = kendaraan.id_tempat_servis SET tempat_servis.status = 'KOSONG' WHERE kendaraan.nopol=:nopol AND kendaraan.status = 'PENDING'",['nopol'=>$nopol]);
+        $update2 = DB::select("UPDATE kendaraan SET status = 'SELESAI SERVIS' WHERE nopol=:nopol",['nopol'=>$nopol]);
+
+        
+        }
+        else{
+
+        $insert = DB::table('penjualan')->insert([
+            'id_nota' => $id_nota,
+            'nopol'=>$nopol,
+            'tgl_masuk'=>DB::raw('now()'),
+            'tgl_keluar'=>DB::raw('now()'),
+            'mekanik'=>$mekanik,
+            'penerima'=>$penerima,
+            'total_harga'=>$total,
+            'bayar'=>$bayar,
+            'kembalian'=>$kembalian,
+            'status'=>"LUNAS"]);
+
+        // DB::table('kendaraan')->where('nopol',$nopol)->update(['status' => 'SELESAI SERVIS']);
+
+        $update2 = DB::select("UPDATE tempat_servis INNER JOIN kendaraan ON tempat_servis.id = kendaraan.id_tempat_servis SET tempat_servis.status = 'KOSONG' WHERE kendaraan.nopol=:nopol and kendaraan.status != 'SELESAI SERVIS'",['nopol'=>$nopol]);
+
+        $update12 = DB::select("UPDATE kendaraan SET status = 'SELESAI SERVIS' WHERE nopol=:nopol",['nopol'=>$nopol]);
+
+
+        //DB::table('penjualan')->where('id_nota',$id_nota)->update(['bayar' => $bayar, 'kembalian' => $kembalian , 'status'=>'LUNAS']);
+       
+       
+            
+        }
+         return 'ok';
+        
+    }
+
+    public function destroy($id) {
+        //
+
+        $detail = DB::select("SELECT * FROM `detail_penjualan` WHERE id=:id",['id'=>$id]);
+        $id_nota = "";
+        foreach ($detail as $key => $result) {
+            # code...
+            $id_nota = $result->id_nota;
+        }
+        $delete = DB::select("DELETE FROM `detail_penjualan` WHERE id=:id",['id'=>$id]);
+        $detail = DB::select("SELECT k.*,('') as total FROM `detail_penjualan` k WHERE k.id_nota=:id",['id'=>$id_nota]);
+        $total = DB::select("select sum(sub_total) as total from detail_penjualan where id_nota=:nota", ['nota' => $id_nota]);
+        $response = ['detail' => $detail, 'total' => $total];
+        // $detail = DB::select("SELECT k.*,(select round(sum(sub_total)/count(id)) from detail_penjualan where id_nota=k.id_nota) as total FROM `detail_penjualan` k WHERE k.id_nota=:id",['id'=>$id_nota]);
+
+        return json_encode($response);
+    }
+
     public function ajaxGenerateDataNopol($id) {
         //
         $data = DB::select("SELECT k.*,p.nama,(select id_nota from penjualan where nopol = k.nopol and status='PENDING') as id_nota FROM `kendaraan` k inner join pelanggan p on p.id = k.id_pelanggan where k.nopol =:nopol ORDER by k.id_pelanggan desc LIMIT 1", ['nopol' => $id]);
