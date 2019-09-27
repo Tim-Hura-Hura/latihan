@@ -26,5 +26,11 @@ public function index()
 		return view('kasir/kendaraan/detail_kendaraan2',['data'=>$data]);
  	}	
 
+ public function detail($id)
+    {	
+    	$data = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.id_tempat_servis,kendaraan.merek,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id where kendaraan.id='$id'"));
+		return view ('kasir/kendaraan/detail',['data'=>$data]);   
+    }
+
    
 }
