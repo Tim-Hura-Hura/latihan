@@ -10,9 +10,6 @@ use Alert;
 class PelangganController extends Controller
 {
 
- 
-
-
 public function index()
 	{
 
@@ -82,4 +79,22 @@ public function detail_pelanggan()
 		return redirect('kasir_pelanggan')->with(['info' => 'Data Berhasil Ditambahkan']);		
 		}		
 	}
+
+public function edit($id)
+    {
+		$data = DB::table('pelanggan')->where('id',$id)->get();
+		return view ('kasir/pelanggan/edit',['data'=>$data]);   
+    }
+  
+public function update(Request $request, $id)
+    {
+		
+		$nama 			= $request->nama;
+		$hp 			= $request->hp;
+		$alamat 		= $request->alamat;
+		
+		DB::table('pelanggan')->where('id',$id)->update(['nama' => $nama, 'hp' => $hp, 'alamat' => $alamat]);
+		return redirect('kasir_detail_pelanggan')->with(['success' => 'Data Berhasil Dirubah']);		
+    }
+
 }
