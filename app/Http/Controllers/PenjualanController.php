@@ -11,8 +11,6 @@ class PenjualanController extends Controller {
 
     public function index() {
 
-
-
         DB::table('penjualan')->get();
         $generatePNJ = DB::select("SELECT concat('PNJ','_',DATE_FORMAT(NOW(), '%d%m%Y'),'_',nomor) AS id_nota from (select case  when nomor IS NULL THEN '001' ELSE  nomor end  AS nomor  from (SELECT right(1000+(max(RIGHT(id_nota,3))+1),3) as nomor FROM `penjualan` where tgl_masuk = CURRENT_DATE) abc) bca");
         foreach ($generatePNJ as $value) {
@@ -40,9 +38,11 @@ class PenjualanController extends Controller {
         return view('kasir.penjualan',['generatePNJ'=>$generatePNJ,'generatePNJ2'=>$generatePNJ2,'detail'=>$detail,'total'=>$total_harga,'listnopol'=>$listnopol,'mekanik'=>$mekanik,'barang'=>$barang,'jasa'=>$jasa]);
     }
 
-     public function kasir_detail()
-    {
 
+
+    public function kasir_detail()
+    {
+       
         $data = DB::select( DB::raw("SELECT * from penjualan order by tgl_masuk desc")); 
         $pemasukan = DB::select( DB::raw("SELECT sum(total_harga)as pemasukan FROM penjualan"));
         $pengeluaran = DB::select( DB::raw("SELECT sum(total_harga)as pengeluaran FROM pembelian"));
@@ -87,8 +87,86 @@ class PenjualanController extends Controller {
         
 
         $hasil = $laba11-$laba22;
+
+        // dd($laba22);
+        // dd($pemasukan4);
+        // $hasil = $pemasukan4-$pengeluaran2;
         return view ('kasir/detail',['data'=>$data,'pemasukan'=>$pemasukan,'pengeluaran'=>$pengeluaran,'hasil'=>$hasil,'pemasukan2'=>$pemasukan2,'pengeluaran2'=>$pengeluaran2,'tgl1'=>$tgl1,'tgl2'=>$tgl2]);  
     }
+
+    public function kasir_detail_sort(Request $request)
+    {
+        
+        $tanggal1 = $request->tanggal1;
+        $tanggal2 = $request->tanggal2;
+
+        
+        $pemasukan = DB::select( DB::raw("SELECT sum(total_harga)as pemasukan FROM penjualan where tgl_masuk between '$tanggal1' and '$tanggal2'"));
+
+        $pemasukan3 = DB::select( DB::raw("SELECT SUM(total_harga)AS pemasukan FROM penjualan WHERE tgl_keluar BETWEEN '$tanggal1' and '$tanggal2'"));
+
+        $pengeluaran = DB::select( DB::raw("SELECT sum(total_harga)as pengeluaran FROM pembelian where tgl_masuk between '$tanggal1' and '$tanggal2'"));
+        
+        $data = DB::select( DB::raw("SELECT * from penjualan where tgl_masuk between '$tanggal1' and '$tanggal2' order by tgl_masuk ASC"));
+
+        $laba1=DB::select(DB::raw("SELECT SUM(detail_penjualan.harga_jual*detail_penjualan.`jumlah`)AS pemasukan FROM detail_penjualan INNER JOIN penjualan ON detail_penjualan.`id_nota` = penjualan.`id_nota`  WHERE tgl_masuk between '$tanggal1' and '$tanggal2';
+        "));
+
+        $laba2=DB::select(DB::raw("SELECT SUM(detail_penjualan.harga_beli*detail_penjualan.`jumlah`)AS pemasukan FROM detail_penjualan INNER JOIN penjualan ON detail_penjualan.`id_nota` = penjualan.`id_nota`  WHERE tgl_masuk between '$tanggal1' and '$tanggal2';
+        "));
+
+        $pemasukan2 = "";
+        $pemasukan4 = "";
+        $pengeluaran2 = "";
+        $laba11 = "";
+        $laba22 = "";
+        
+        $tgl1 = $tanggal1;
+        $tgl2 = $tanggal2;
+
+        foreach ($pemasukan as $key1) {
+            $pemasukan2 = $key1->pemasukan;
+        };
+        foreach ($pemasukan3 as $key3) {
+            $pemasukan4 = $key3->pemasukan;
+        };
+        foreach ($pengeluaran as $key2) {
+            $pengeluaran2 = $key2->pengeluaran;
+        };
+
+        foreach ($laba1 as $key5) {
+            $laba11 = $key5->pemasukan;
+        };
+        foreach ($laba2 as $key6) {
+            $laba22 = $key6->pemasukan;
+        };
+        
+
+        $hasil = $laba11-$laba22;
+        
+        return view ('kasir/detail',['data'=>$data,'pemasukan'=>$pemasukan,'pengeluaran'=>$pengeluaran,'hasil'=>$hasil,'pemasukan2'=>$pemasukan2,'pengeluaran2'=>$pengeluaran2,'tgl1'=>$tgl1,'tgl2'=>$tgl2]);      }
+
+    public function kasir_detail_list($id_nota)
+    {
+        $data = DB::select( DB::raw("SELECT * from detail_penjualan where id_nota ='$id_nota'"));
+        $data2 = DB::select( DB::raw("SELECT total_harga from penjualan where id_nota ='$id_nota'"));
+
+         
+        // dd($laba);
+        return view ('kasir/penjualan/detail',['data'=>$data,'data2'=>$data2]);   
+    }
+
+    public function create() {
+        //
+        $detail = DB::select("SELECT AUTO_INCREMENT as id FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'ta' AND TABLE_NAME = 'detail_penjualan'");
+        $id_detail = "";
+        foreach ($detail as $key => $value) {
+            # code...
+            $id_detail = $value->id;
+            echo $id_detail;
+        }
+    }
+ 
 
     public function store(Request $request) {
         //pending
@@ -177,10 +255,7 @@ class PenjualanController extends Controller {
         $update12 = DB::select("UPDATE kendaraan SET status = 'SELESAI SERVIS' WHERE nopol=:nopol",['nopol'=>$nopol]);
 
 
-        //DB::table('penjualan')->where('id_nota',$id_nota)->update(['bayar' => $bayar, 'kembalian' => $kembalian , 'status'=>'LUNAS']);
-       
-       
-            
+        //DB::table('penjualan')->where('id_nota',$id_nota)->update(['bayar' => $bayar, 'kembalian' => $kembalian , 'status'=>'LUNAS']);          
         }
          return 'ok';
         
@@ -291,6 +366,4 @@ class PenjualanController extends Controller {
         }
 
     }
-
-    
 }

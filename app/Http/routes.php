@@ -11,6 +11,7 @@ Route::resource('kasir_tempat_servis', 'Tempat_Servis_Controller');
 Route::resource('kasir_detail', 'PenjualanController@kasir_detail');
 Route::resource('kasir_lane', 'LaneController');
 Route::resource('kasir_penjualan', 'PenjualanController');
+Route::resource('kasir_detail_list', 'PenjualanController@kasir_detail_list');
 Route::resource('kasir_kendaraan_histori', 'KendaraanController@kasir_kendaraan_histori');
 
 
