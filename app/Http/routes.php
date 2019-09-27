@@ -13,3 +13,10 @@ Route::resource('kasir_lane', 'LaneController');
 Route::resource('kasir_penjualan', 'PenjualanController');
 Route::resource('kasir_kendaraan_histori', 'KendaraanController@kasir_kendaraan_histori');
 
+
+//ajak penjualan
+Route::get('ajax/generateNopol/{id}', 'PenjualanController@ajaxGenerateDataNopol');
+Route::get('ajax/generateKodeBarang/{id}', 'PenjualanController@ajaxGenerateDataKodeBarang');
+Route::get('ajax/generateKodeJasa/{id}', 'PenjualanController@ajaxGenerateDataKodeJasa');
+Route::post('ajax/tambahDetail', 'PenjualanController@ajaxTambahDetail');
+
