@@ -18,6 +18,14 @@ public function index()
 		return view('kasir/index',['data'=>$data],['no_urut'=>$no_urut]);
  	}
 
+public function ajaxGenerateDataNopol($id){
+        //
+        $data = DB::select("SELECT k.*,p.nama,p.alamat,p.hp FROM `kendaraan` k inner join pelanggan p on p.id = k.id_pelanggan where k.nopol =:nopol ORDER by k.id desc LIMIT 1", ['nopol' => $id]);
+        $response = ['data' => $data];
+        return json_encode($response);
+    }
+
+
 public function detail_pelanggan()
 	{
 		$data = DB::table('pelanggan')->get();
