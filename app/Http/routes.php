@@ -15,6 +15,10 @@ Route::resource('kasir_detail_sort', 'PenjualanController@kasir_detail_sort');
 Route::resource('kasir_detail_list', 'PenjualanController@kasir_detail_list');
 Route::resource('kasir_kendaraan_histori', 'KendaraanController@kasir_kendaraan_histori');
 
+//penjualan2
+Route::resource('kasir_penjualan2_edit', 'Penjualan2Controller@kasir_penjualan2_edit');
+Route::resource('kasir_penjualan2_bayar', 'Penjualan2Controller@kasir_penjualan2_bayar');
+
 
 //ajak penjualan
 Route::get('ajax/generateNopol/{id}', 'PenjualanController@ajaxGenerateDataNopol');
@@ -24,6 +28,12 @@ Route::post('ajax/tambahDetail', 'PenjualanController@ajaxTambahDetail');
 
 //ajak pelanggan
 Route::get('ajax/pelgenerateNopol/{id}', 'PelangganController@ajaxGenerateDataNopol');
+
+//ajak penjualan2
+Route::get('ajax/generateKodeBarang2/{id}', 'Penjualan2Controller@ajaxGenerateDataKodeBarang');
+Route::get('ajax/generateKodeJasa2/{id}', 'Penjualan2Controller@ajaxGenerateDataKodeJasa');
+Route::post('ajax/tambahDetail2', 'Penjualan2Controller@ajaxTambahDetail');
+Route::get('ajax/generateDetail2/{id}', 'Penjualan2Controller@generateDetail');
 
 //nota	
 Route::get('nota/{id}',  'NotaController@makePDF');
