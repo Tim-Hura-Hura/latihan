@@ -2,6 +2,7 @@
 
 
 @section ('content')
+
  	 <div class="product-cart-area mg-tb-15">
             <div class="container-fluid">
                 <div class="row">
@@ -192,9 +193,9 @@
 
 		
 	
-@endsection		
+		
 
-
+@endsection
 
 <script type="text/javascript">
         function ajaxGenerateNopol() {

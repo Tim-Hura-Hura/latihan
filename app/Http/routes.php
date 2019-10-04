@@ -19,6 +19,9 @@ Route::resource('kasir_kendaraan_histori', 'KendaraanController@kasir_kendaraan_
 Route::resource('kasir_penjualan2_edit', 'Penjualan2Controller@kasir_penjualan2_edit');
 Route::resource('kasir_penjualan2_bayar', 'Penjualan2Controller@kasir_penjualan2_bayar');
 
+//lane 
+Route::resource('kasir_lane', 'LaneController');
+
 
 //ajak penjualan
 Route::get('ajax/generateNopol/{id}', 'PenjualanController@ajaxGenerateDataNopol');
