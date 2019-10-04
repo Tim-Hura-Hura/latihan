@@ -48,4 +48,21 @@ public function index()
 
 		 
 	}
+
+	public function edit($id_jasa)
+    {
+		$data = DB::table('jasa')->where('id_jasa',$id_jasa)->get();
+		return view ('kasir/jasa/edit',['data'=>$data]);   
+    }
+  
+public function update(Request $request, $id_jasa)
+    {
+		
+		$jenis_jasa	= $request->jenis_jasa;
+		$harga 		= $request->harga;
+
+		
+		DB::table('jasa')->where('id_jasa',$id_jasa)->update(['jenis_jasa' => $jenis_jasa, 'harga' => $harga]);
+		return redirect('kasir_jasa')->with(['success' => 'Data Berhasil Dirubah']);  
+    }
 }
