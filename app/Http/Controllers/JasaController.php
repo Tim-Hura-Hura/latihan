@@ -64,5 +64,12 @@ public function update(Request $request, $id_jasa)
 		
 		DB::table('jasa')->where('id_jasa',$id_jasa)->update(['jenis_jasa' => $jenis_jasa, 'harga' => $harga]);
 		return redirect('kasir_jasa')->with(['success' => 'Data Berhasil Dirubah']);  
+	}
+	
+	public function destroy($id_jasa)
+    {
+       	Alert::error('Data Berhasil Dihapus');
+        DB::table('jasa')->where('id_jasa',$id_jasa)->delete();
+		return redirect('kasir_jasa')->with(['error' => 'Data Berhasil Dihapus']);  
     }
 }
