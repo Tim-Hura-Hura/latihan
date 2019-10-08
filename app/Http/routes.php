@@ -43,3 +43,7 @@ Route::get('nota/{id}',  'NotaController@makePDF');
 Route::get('pending/{id}',  'NotaController@pending');
 Route::get('nota_pembelian/{id}',  'NotaController@nota_pembelian');
 
+
+//Gudang
+Route::resource('gudang_barang', 'BarangController');
+

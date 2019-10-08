@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2019 at 02:23 PM
+-- Generation Time: Oct 08, 2019 at 03:24 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -83,6 +83,13 @@ CREATE TABLE `detail_penjualan` (
   `sub_total` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `detail_penjualan`
+--
+
+INSERT INTO `detail_penjualan` (`id`, `id_nota`, `nama_barang_jasa`, `harga_beli`, `harga_jual`, `jumlah`, `sub_total`) VALUES
+(1, 'PNJ_27092019_001', 'Busi Thailand', 12000, 15000, 2, 30000);
+
 -- --------------------------------------------------------
 
 --
@@ -123,6 +130,43 @@ CREATE TABLE `kendaraan` (
   `id_tempat_servis` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `kendaraan`
+--
+
+INSERT INTO `kendaraan` (`id`, `nopol`, `no_mesin`, `merek`, `tipe`, `warna`, `keluhan`, `status`, `id_pelanggan`, `id_tempat_servis`) VALUES
+(1, 'AG 4512 DE', '12314', 'Suzuki', 'Esterla 62', 'biru', '', 'SELESAI SERVIS', 1, 'Lane 2'),
+(2, 'AG 4512 DE', '12314', 'Suzuki', 'Esterla 62', 'biru', 'ganti busi', 'SEDANG DIKERJAKAN', 2, 'Lane 2'),
+(3, 'AG 1512 DE', '235235', 'Kawasaki', 'Kaze 120 R', 'hijau', ' ganti oli', 'SEDANG DIKERJAKAN', 3, 'Lane 3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `merek`
+--
+
+CREATE TABLE `merek` (
+  `no` int(11) NOT NULL,
+  `merek` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `merek`
+--
+
+INSERT INTO `merek` (`no`, `merek`) VALUES
+(1, 'Honda'),
+(2, 'Yamaha'),
+(3, 'Suzuki'),
+(4, 'Kawasaki'),
+(5, 'TVS'),
+(6, 'Vespa'),
+(7, 'Harley-davidson'),
+(8, 'Viar'),
+(9, 'Kaisar'),
+(10, 'Ducati'),
+(11, 'Aprilia');
+
 -- --------------------------------------------------------
 
 --
@@ -159,6 +203,15 @@ CREATE TABLE `pelanggan` (
   `alamat` varchar(222) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pelanggan`
+--
+
+INSERT INTO `pelanggan` (`id`, `nama`, `hp`, `alamat`) VALUES
+(1, 'Edo J', '6285645137127', 'kediri selatan'),
+(2, 'Edo J', '6285645137127', 'kediri selatan'),
+(3, 'edo', '86755152156', 'kediri');
+
 -- --------------------------------------------------------
 
 --
@@ -191,6 +244,14 @@ CREATE TABLE `penjualan` (
   `kembalian` int(10) DEFAULT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `penjualan`
+--
+
+INSERT INTO `penjualan` (`id_nota`, `nopol`, `tgl_masuk`, `tgl_keluar`, `mekanik`, `penerima`, `total_harga`, `bayar`, `kembalian`, `status`) VALUES
+('PNJ_27092019_001', 'AG 4512 DE', '2019-09-27', '2019-09-27', 'Sumardi', 'Edo J', 30000, 60000, 30000, 'LUNAS'),
+('PNJ_27092019_002', '', '2019-09-27', NULL, '', '', 0, NULL, NULL, 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -241,8 +302,8 @@ CREATE TABLE `tempat_servis` (
 
 INSERT INTO `tempat_servis` (`id`, `status`) VALUES
 ('Lane 1', 'SEDANG DIGUNAKAN'),
-('Lane 2', 'KOSONG'),
-('Lane 3', 'KOSONG');
+('Lane 2', 'SEDANG DIGUNAKAN'),
+('Lane 3', 'SEDANG DIGUNAKAN');
 
 --
 -- Indexes for dumped tables
@@ -278,6 +339,12 @@ ALTER TABLE `jasa`
 --
 ALTER TABLE `kendaraan`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `merek`
+--
+ALTER TABLE `merek`
+  ADD PRIMARY KEY (`no`);
 
 --
 -- Indexes for table `pegawai`
@@ -336,7 +403,7 @@ ALTER TABLE `detail_pembelian`
 -- AUTO_INCREMENT for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jasa`
@@ -348,7 +415,13 @@ ALTER TABLE `jasa`
 -- AUTO_INCREMENT for table `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `merek`
+--
+ALTER TABLE `merek`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
@@ -360,7 +433,7 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `stok`
