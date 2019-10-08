@@ -82,12 +82,6 @@
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <!-- <div class="review-content-section">
-                                        <div class="form-group">
-                                            <label for="card-number" class="form-label">Nopol</label>
-                                            <input id="nopol" name="nopol" type="text" class="form-control">
-                                        </div>
-                                            </div> -->
 
                                             
                                              <div class="review-content-section">
@@ -119,7 +113,18 @@
                                             <div class="review-content-section">
                                                  <div class="form-group">
                                                     <label for="card-number" class="form-label">Merek Kendaraan</label>
-                                                    <input id="merek" name="merek" type="text" class="form-control">
+                                                    <select data-placeholder=" "  class="chosen-select form-control" tabindex="-1" id="merek" name="merek">
+                                                                        
+                                                        <option> </option>
+                                                        @foreach ($merek as $mk)
+                                                        <option>{{$mk -> merek}}</option>
+                                                        @endforeach
+
+
+                                                                      
+                                                              
+                                                    </select>
+                                                        <!--<input id="merek" name="merek" type="text" class="form-control"> -->
                                                 </div>
                                             </div>
                                     </div>                                  

@@ -15,7 +15,8 @@ public function index()
 
 		$no_urut = DB::select( DB::raw("SELECT concat(nomor) AS no_urut from(select case  when nomor IS NULL THEN '1' ELSE  nomor end  AS nomor  from (SELECT MAX(id+1) as nomor FROM `pelanggan`) abc) bca"));		
 		$data = DB::table('tempat_servis')->where('status','KOSONG')->get();
-		return view('kasir/index',['data'=>$data],['no_urut'=>$no_urut]);
+		$merek = DB::table('merek')->get();
+		return view('kasir/index',['data'=>$data,'merek'=>$merek],['no_urut'=>$no_urut]);
  	}
 
 public function ajaxGenerateDataNopol($id){
