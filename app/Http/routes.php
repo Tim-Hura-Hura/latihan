@@ -46,4 +46,12 @@ Route::get('nota_pembelian/{id}',  'NotaController@nota_pembelian');
 
 //Gudang
 Route::resource('gudang_barang', 'BarangController');
+Route::resource('gudang_stok', 'StokController');
+Route::resource('gudang_pembelian', 'PembelianController');
+
+
+//ajak pembelian
+Route::get('ajax_pmb/generateKodeBarang/{id}', 'PembelianController@ajaxGenerateDataKodeBarang');
+Route::post('ajax_pmb/tambahDetail', 'PembelianController@ajaxTambahDetail');
+Route::get('ajax_pmb/generateDetail/{id}', 'PembelianController@generateDetail')->where('id', '(.*)');
 

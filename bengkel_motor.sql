@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2019 at 03:24 PM
+-- Generation Time: Oct 17, 2019 at 04:13 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -67,6 +67,22 @@ CREATE TABLE `detail_pembelian` (
   `suplier` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Triggers `detail_pembelian`
+--
+DELIMITER $$
+CREATE TRIGGER `pembelian_kurang` AFTER DELETE ON `detail_pembelian` FOR EACH ROW BEGIN
+UPDATE stok SET jumlah = jumlah-old.jumlah WHERE nama_barang = old.nama_barang;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `pembelian_tambah` AFTER INSERT ON `detail_pembelian` FOR EACH ROW BEGIN
+UPDATE stok SET jumlah = jumlah+new.jumlah WHERE nama_barang = new.nama_barang;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -89,6 +105,22 @@ CREATE TABLE `detail_penjualan` (
 
 INSERT INTO `detail_penjualan` (`id`, `id_nota`, `nama_barang_jasa`, `harga_beli`, `harga_jual`, `jumlah`, `sub_total`) VALUES
 (1, 'PNJ_27092019_001', 'Busi Thailand', 12000, 15000, 2, 30000);
+
+--
+-- Triggers `detail_penjualan`
+--
+DELIMITER $$
+CREATE TRIGGER `penjualan_kurang` AFTER INSERT ON `detail_penjualan` FOR EACH ROW BEGIN
+UPDATE stok SET jumlah = jumlah-new.jumlah WHERE nama_barang = new.nama_barang_jasa;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `penjualan_tambah` AFTER DELETE ON `detail_penjualan` FOR EACH ROW BEGIN
+UPDATE stok SET jumlah = jumlah+old.jumlah WHERE nama_barang = old.nama_barang_jasa;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -277,7 +309,7 @@ INSERT INTO `stok` (`id`, `nama_barang`, `jumlah`, `harga_beli`, `harga_jual`, `
 (25, 'Busi Thailand', 53, 12000, 15000, 'anas'),
 (26, 'Oli Top 1', 44, 41000, 45000, 'anas'),
 (27, 'Oli Supreme', 30, 34000, 37000, 'anas'),
-(28, 'Lampu depan mio', -48, 6000, 9000, 'anas'),
+(28, 'Lampu depan mio', 699, 6000, 9000, 'anas'),
 (29, 'Oli Ultratec 1 liter', 60, 33000, 36000, 'anas'),
 (30, 'Oli evalube 1 liter', 6, 25000, 29000, 'anas'),
 (31, 'Sampolis', 100, 5000, 7000, 'anas'),
