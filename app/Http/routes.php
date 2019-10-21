@@ -48,6 +48,8 @@ Route::get('nota_pembelian/{id}',  'NotaController@nota_pembelian');
 Route::resource('gudang_barang', 'BarangController');
 Route::resource('gudang_stok', 'StokController');
 Route::resource('gudang_pembelian', 'PembelianController');
+Route::resource('gudang_detail', 'PembelianController@gudang_detail');
+
 
 
 //ajak pembelian

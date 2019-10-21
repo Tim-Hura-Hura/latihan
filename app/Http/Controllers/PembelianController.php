@@ -175,13 +175,10 @@ class PembelianController extends Controller {
     public function gudang_detail()
 
     {
-        if(!Session::get('login'))
-             {
-            return redirect('login');
-             }
+
         
         $data = DB::select( DB::raw("SELECT * from pembelian order by tgl_masuk desc")); 
-       $pemasukan = DB::select( DB::raw("SELECT sum(total_harga)as pemasukan FROM penjualan"));
+        $pemasukan = DB::select( DB::raw("SELECT sum(total_harga)as pemasukan FROM penjualan"));
         $pengeluaran = DB::select( DB::raw("SELECT sum(total_harga)as pengeluaran FROM pembelian"));
         $tgl_pemasukan = DB::select( DB::raw("SELECT '2019-05-01' as tgl_masuk"));
         $tgl_pengeluaran = DB::select( DB::raw("SELECT CURDATE() AS tgl_keluar"));
