@@ -53,6 +53,20 @@ public function index()
 
 	}
 
+	public function edit($kode_barang)
+    {
+		$data = DB::table('barang')->where('kode_barang',$kode_barang)->get();
+		return view ('gudang/barang/edit',['data'=>$data]);   
+    }
+  
+public function update(Request $request, $kode_barang)
+    {
+		
+		$nama_barang	= $request->nama_barang;
+		DB::table('barang')->where('kode_barang',$kode_barang)->update(['nama_barang' => $nama_barang]);
+		return redirect('gudang_barang')->with(['success' => 'Data Berhasil Dirubah']); 	
+    }
+
 
 
    
