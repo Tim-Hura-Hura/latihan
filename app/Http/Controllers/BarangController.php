@@ -67,6 +67,14 @@ public function update(Request $request, $kode_barang)
 		return redirect('gudang_barang')->with(['success' => 'Data Berhasil Dirubah']); 	
     }
 
+public function destroy($kode_barang)
+    {
+       	Alert::error('Data Berhasil Dihapus');
+        DB::table('barang')->where('kode_barang',$kode_barang)->delete();
+		return redirect('gudang_barang')->with(['success' => 'Data Berhasil Dihapus']); 	 
+    }
+
+
 
 
    
