@@ -41,7 +41,8 @@
                         <div class="sparkline13-list">
                             <div class="sparkline13-hd">
                                 <div class="main-sparkline13-hd">
-                                    <h1>Detail <span class="table-project-n">Penjualan</span></h1>
+                                    <h1>Detail <span class="table-project-n">Penjualan</span>
+                                    </h1>
                                 </div>
                             </div>
                             <div class="sparkline13-graph">
@@ -70,6 +71,9 @@
                                         <tbody>
 
                                         @foreach ($data as $dt)  
+
+                                        <a href="{{url('nota',$dt->id_nota)}}"  class="btn btn-success" style="float: right;">Cetak Nota</a>
+                                        <br><br>
                                             <tr>
                                             @php
                                             

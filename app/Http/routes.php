@@ -31,6 +31,7 @@ Route::post('ajax/tambahDetail', 'PenjualanController@ajaxTambahDetail');
 
 //ajak pelanggan
 Route::get('ajax/pelgenerateNopol/{id}', 'PelangganController@ajaxGenerateDataNopol');
+Route::get('ajax/pelgenerateMerek/{id}', 'PelangganController@ajaxGenerateDataMerek');
 
 //ajak penjualan2
 Route::get('ajax/generateKodeBarang2/{id}', 'Penjualan2Controller@ajaxGenerateDataKodeBarang');

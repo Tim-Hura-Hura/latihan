@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2019 at 04:13 PM
+-- Generation Time: Oct 24, 2019 at 07:07 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -68,6 +68,13 @@ CREATE TABLE `detail_pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `detail_pembelian`
+--
+
+INSERT INTO `detail_pembelian` (`id`, `id_nota`, `nama_barang`, `harga_beli`, `harga_jual`, `jumlah`, `sub_total`, `suplier`) VALUES
+(1, 'PMB_17102019_001', 'Oli Mesran', 35000, 40000, 2, 70000, 'Pak Anas');
+
+--
 -- Triggers `detail_pembelian`
 --
 DELIMITER $$
@@ -104,7 +111,12 @@ CREATE TABLE `detail_penjualan` (
 --
 
 INSERT INTO `detail_penjualan` (`id`, `id_nota`, `nama_barang_jasa`, `harga_beli`, `harga_jual`, `jumlah`, `sub_total`) VALUES
-(1, 'PNJ_27092019_001', 'Busi Thailand', 12000, 15000, 2, 30000);
+(1, 'PNJ_27092019_001', 'Busi Thailand', 12000, 15000, 2, 30000),
+(2, 'PNJ_22102019_001', 'Ganti Mesin', 0, 150000, 2, 300000),
+(3, 'PNJ_22102019_002', 'Kit semprot', 10000, 12500, 2, 25000),
+(4, 'PNJ_24102019_002', 'Kit semprot', 10000, 12500, 3, 37500),
+(5, 'PNJ_24102019_002', 'Oli evalube 1 liter', 25000, 29000, 2, 58000),
+(6, 'PNJ_24102019_002', 'Oli gardan', 10000, 15000, 2, 30000);
 
 --
 -- Triggers `detail_penjualan`
@@ -167,9 +179,9 @@ CREATE TABLE `kendaraan` (
 --
 
 INSERT INTO `kendaraan` (`id`, `nopol`, `no_mesin`, `merek`, `tipe`, `warna`, `keluhan`, `status`, `id_pelanggan`, `id_tempat_servis`) VALUES
-(1, 'AG 4512 DE', '12314', 'Suzuki', 'Esterla 62', 'biru', '', 'SELESAI SERVIS', 1, 'Lane 2'),
-(2, 'AG 4512 DE', '12314', 'Suzuki', 'Esterla 62', 'biru', 'ganti busi', 'SEDANG DIKERJAKAN', 2, 'Lane 2'),
-(3, 'AG 1512 DE', '235235', 'Kawasaki', 'Kaze 120 R', 'hijau', ' ganti oli', 'SEDANG DIKERJAKAN', 3, 'Lane 3');
+(1, 'AG 4512 DE', '12314', 'Suzuki', 'KLX 150', 'Biru', '', 'SELESAI SERVIS', 1, 'Lane 2'),
+(2, 'AG 4512 DE', '12314', 'Suzuki', 'KLX 150', 'Biru', 'ganti busi', 'SELESAI SERVIS', 2, 'Lane 2'),
+(3, 'AG 1512 DE', '235235', 'Kawasaki', 'Ninja 250', 'Hijau', ' ganti oli', 'PENDING', 3, 'Lane 3');
 
 -- --------------------------------------------------------
 
@@ -187,17 +199,17 @@ CREATE TABLE `merek` (
 --
 
 INSERT INTO `merek` (`no`, `merek`) VALUES
+(11, 'Aprilia'),
+(10, 'Ducati'),
+(7, 'Harley-davidson'),
 (1, 'Honda'),
-(2, 'Yamaha'),
-(3, 'Suzuki'),
+(9, 'Kaisar'),
 (4, 'Kawasaki'),
+(3, 'Suzuki'),
 (5, 'TVS'),
 (6, 'Vespa'),
-(7, 'Harley-davidson'),
 (8, 'Viar'),
-(9, 'Kaisar'),
-(10, 'Ducati'),
-(11, 'Aprilia');
+(2, 'Yamaha');
 
 -- --------------------------------------------------------
 
@@ -258,6 +270,13 @@ CREATE TABLE `pembelian` (
   `kembalian` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pembelian`
+--
+
+INSERT INTO `pembelian` (`id_nota`, `tgl_masuk`, `total_harga`, `bayar`, `kembalian`) VALUES
+('PMB_17102019_001', '2019-10-17', 70000, 100000, 30000);
+
 -- --------------------------------------------------------
 
 --
@@ -282,6 +301,10 @@ CREATE TABLE `penjualan` (
 --
 
 INSERT INTO `penjualan` (`id_nota`, `nopol`, `tgl_masuk`, `tgl_keluar`, `mekanik`, `penerima`, `total_harga`, `bayar`, `kembalian`, `status`) VALUES
+('PNJ_22102019_001', '', '2019-10-22', '2019-10-22', '', '', 300000, 500000, 200000, 'LUNAS'),
+('PNJ_22102019_002', 'AG 4512 DE', '2019-10-22', '2019-10-22', 'Sumardi', 'Edo J', 25000, 50000, 25000, 'LUNAS'),
+('PNJ_24102019_001', '', '2019-10-24', NULL, '', '', 0, NULL, NULL, 'PENDING'),
+('PNJ_24102019_002', 'AG 1512 DE', '2019-10-24', NULL, '', 'edo', 0, NULL, NULL, 'PENDING'),
 ('PNJ_27092019_001', 'AG 4512 DE', '2019-09-27', '2019-09-27', 'Sumardi', 'Edo J', 30000, 60000, 30000, 'LUNAS'),
 ('PNJ_27092019_002', '', '2019-09-27', NULL, '', '', 0, NULL, NULL, 'PENDING');
 
@@ -305,16 +328,16 @@ CREATE TABLE `stok` (
 --
 
 INSERT INTO `stok` (`id`, `nama_barang`, `jumlah`, `harga_beli`, `harga_jual`, `suplier`) VALUES
-(24, 'Oli Mesran', 30, 35000, 40000, 'anas'),
+(24, 'Oli Mesran', 32, 35000, 40000, 'anas'),
 (25, 'Busi Thailand', 53, 12000, 15000, 'anas'),
-(26, 'Oli Top 1', 44, 41000, 45000, 'anas'),
+(26, 'Oli Top 1', 4, 41000, 45000, 'anas'),
 (27, 'Oli Supreme', 30, 34000, 37000, 'anas'),
 (28, 'Lampu depan mio', 699, 6000, 9000, 'anas'),
 (29, 'Oli Ultratec 1 liter', 60, 33000, 36000, 'anas'),
-(30, 'Oli evalube 1 liter', 6, 25000, 29000, 'anas'),
+(30, 'Oli evalube 1 liter', 1, 25000, 29000, 'anas'),
 (31, 'Sampolis', 100, 5000, 7000, 'anas'),
-(32, 'Kit semprot', 46, 10000, 12500, 'anas'),
-(33, 'Oli gardan', 19, 10000, 15000, 'anas'),
+(32, 'Kit semprot', 42, 10000, 12500, 'anas'),
+(33, 'Oli gardan', 17, 10000, 15000, 'anas'),
 (34, 'Ban dalam 2.75', 37, 25000, 27000, 'anas');
 
 -- --------------------------------------------------------
@@ -333,9 +356,142 @@ CREATE TABLE `tempat_servis` (
 --
 
 INSERT INTO `tempat_servis` (`id`, `status`) VALUES
-('Lane 1', 'SEDANG DIGUNAKAN'),
+('Lane 1', 'KOSONG'),
 ('Lane 2', 'SEDANG DIGUNAKAN'),
 ('Lane 3', 'SEDANG DIGUNAKAN');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tipe_kendaraan`
+--
+
+CREATE TABLE `tipe_kendaraan` (
+  `no` int(11) NOT NULL,
+  `merek` varchar(20) NOT NULL,
+  `tipe` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tipe_kendaraan`
+--
+
+INSERT INTO `tipe_kendaraan` (`no`, `merek`, `tipe`) VALUES
+(2, 'Honda', 'Revo'),
+(3, 'Honda', 'Supra X'),
+(4, 'Honda', 'Supra GTR 150'),
+(5, 'Honda', 'Beat'),
+(6, 'Honda', 'Honda Genio'),
+(7, 'Honda', 'Vario 110'),
+(8, 'Honda', 'Scoopy'),
+(9, 'Honda', 'Vario 125'),
+(10, 'Honda', 'PCX'),
+(11, 'Honda', 'ADV 150'),
+(12, 'Honda', 'CB150 Verza'),
+(13, 'Honda', 'Mega Pro'),
+(14, 'Honda', 'Sonic 150R'),
+(15, 'Honda', 'CB 150R'),
+(16, 'Honda', ' CBR 150R'),
+(17, 'Honda', 'CBR 250RR'),
+(18, 'Aprilia', 'Tuono V4 1100'),
+(19, 'Aprilia', 'Aprilia RSV4 RF'),
+(20, 'Aprilia', 'SR Max 300'),
+(21, 'Aprilia', 'SRV 850'),
+(22, 'Aprilia', 'RX 125'),
+(23, 'Aprilia', 'SX 125'),
+(24, 'Aprilia', 'RX 50'),
+(25, 'Aprilia', 'Scarabeo 200 ie'),
+(26, 'Aprilia', 'Nuovo 50 4t 4v'),
+(27, 'Ducati', 'Diavel'),
+(28, 'Ducati', 'Hypermotard'),
+(29, 'Ducati', 'Monster'),
+(30, 'Ducati', 'MultiStrada'),
+(31, 'Ducati', 'Panigale V4'),
+(32, 'Ducati', 'Diavel'),
+(33, 'Ducati', 'Hypermotard'),
+(34, 'Ducati', 'Monster'),
+(35, 'Ducati', 'MultiStrada'),
+(36, 'Ducati', 'Panigale V4'),
+(37, 'Harley-davidson', 'CVO Street Glide'),
+(38, 'Harley-davidson', 'Street 500'),
+(39, 'Harley-davidson', 'Davidson Iron 883'),
+(40, 'Harley-davidson', 'Buell'),
+(41, 'Harley-davidson', 'V-Rod'),
+(42, 'Harley-davidson', 'V-Rod'),
+(43, 'Harley-davidson', 'Dyna'),
+(44, 'Harley-davidson', 'Softail'),
+(45, 'Harley-davidson', 'Cruiser'),
+(46, 'Kaisar', 'Ruby V250'),
+(47, 'Kawasaki', 'KLX 150'),
+(48, 'Kawasaki', 'Ninja 250'),
+(49, 'Kawasaki', 'W175'),
+(50, 'Kawasaki', 'KLX 150'),
+(51, 'Kawasaki', 'D-Tracker'),
+(52, 'Kawasaki', 'Z250'),
+(53, 'Kawasaki', 'Kaze 125'),
+(61, 'Suzuki', 'GSX R150'),
+(62, 'Suzuki', 'GSX R150'),
+(63, 'Suzuki', 'NEX II'),
+(64, 'Suzuki', 'GSX S150'),
+(65, 'Suzuki', 'Smash FI'),
+(66, 'Suzuki', 'GSX 150 Bandit'),
+(68, 'TVS', 'Dazz'),
+(69, 'TVS', 'Neo XR'),
+(70, 'TVS', 'Rockz'),
+(71, 'TVS', 'Max 125'),
+(72, 'TVS', 'Max 125 Semi Trail'),
+(73, 'TVS', 'Apache RTR 200 4V'),
+(74, 'TVS', 'Apache RR 310'),
+(75, 'TVS', 'Classic'),
+(76, 'Vespa', 'Sprint'),
+(77, 'Vespa', 'S'),
+(78, 'Vespa', 'LX'),
+(79, 'Vespa', 'Primavera'),
+(80, 'Vespa', 'GTS 150'),
+(81, 'Vespa', 'GTS 300 Super Tech'),
+(82, 'Viar', 'Vortex'),
+(83, 'Viar', 'Cross X 70 Mini'),
+(84, 'Viar', 'Cross X 150'),
+(85, 'Viar', 'Cross X 200 GT'),
+(86, 'Viar', 'Razor 100 SP'),
+(87, 'Viar', ' Razor 150 UT'),
+(88, 'Yamaha', 'Fino 125 Blue Core'),
+(89, 'Yamaha', 'X-RIDE'),
+(90, 'Yamaha', 'NMAX'),
+(91, 'Yamaha', 'Mio Z'),
+(92, 'Yamaha', 'Mio M3 125'),
+(93, 'Yamaha', 'Aerox 155'),
+(94, 'Yamaha', 'Jupiter Z F1'),
+(95, 'Yamaha', 'Jupiter MX 150'),
+(96, 'Yamaha', 'R25'),
+(97, 'Yamaha', 'Vixion'),
+(98, 'Yamaha', 'Byson');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warna`
+--
+
+CREATE TABLE `warna` (
+  `no` int(11) NOT NULL,
+  `warna` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `warna`
+--
+
+INSERT INTO `warna` (`no`, `warna`) VALUES
+(1, 'Merah'),
+(2, 'Kuning'),
+(3, 'Biru'),
+(4, 'Putih'),
+(5, 'Abu - Abu'),
+(6, 'Hitam'),
+(7, 'Jingga'),
+(8, 'Hijau'),
+(9, 'Warna Lain');
 
 --
 -- Indexes for dumped tables
@@ -376,7 +532,8 @@ ALTER TABLE `kendaraan`
 -- Indexes for table `merek`
 --
 ALTER TABLE `merek`
-  ADD PRIMARY KEY (`no`);
+  ADD PRIMARY KEY (`no`),
+  ADD UNIQUE KEY `merek` (`merek`);
 
 --
 -- Indexes for table `pegawai`
@@ -416,6 +573,19 @@ ALTER TABLE `tempat_servis`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tipe_kendaraan`
+--
+ALTER TABLE `tipe_kendaraan`
+  ADD PRIMARY KEY (`no`),
+  ADD KEY `merek` (`merek`);
+
+--
+-- Indexes for table `warna`
+--
+ALTER TABLE `warna`
+  ADD PRIMARY KEY (`no`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -429,13 +599,13 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `jasa`
@@ -472,6 +642,28 @@ ALTER TABLE `pelanggan`
 --
 ALTER TABLE `stok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `tipe_kendaraan`
+--
+ALTER TABLE `tipe_kendaraan`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+
+--
+-- AUTO_INCREMENT for table `warna`
+--
+ALTER TABLE `warna`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tipe_kendaraan`
+--
+ALTER TABLE `tipe_kendaraan`
+  ADD CONSTRAINT `tipe_kendaraan_ibfk_1` FOREIGN KEY (`merek`) REFERENCES `merek` (`merek`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

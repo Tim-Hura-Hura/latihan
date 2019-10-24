@@ -63,39 +63,48 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="review-content-section">
-                                                                <div class="form-group">
-                                                                    <label for="card-number" class="form-label">Kode Barang / Jasa</label>
-                                                             
-                                                                    <div class="form-group form-inline  ">                                               
-                                                                        <input id="kode_barang" onkeyup="ajaxGenerateKodeBarang('kode')" name="kode" type="text" class="form-control" readonly="" style="width: 222px">
-                                                                        <label style="width: 22px">/</label>
-                                                                        <input id="kode_jasa" onkeyup="ajaxGenerateKodeJasa('kode')" name="kode_jasa" type="text" class="form-control" readonly="" style="width: 222px">
+                                                                <div class="form-group">  
+                                                                    <label for="card-number" class="form-label">Kode Barang / Nama Barang</label>
+                                                                    <div class="row">                                
+                                                                    <div class="form-group form-inline">
+                                                                        <div class="col-sm-6">                       
+                                                                            <input id="kode_barang" onkeyup="ajaxGenerateKodeBarang('kode')" name="kode" type="text" class="form-control" readonly="">
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <select id="nama_barang" onchange="ajaxGenerateKodeBarang('nama')" name="nama" type="text" class="form-control" style="width:222px">
+                                                                                    <option> </option>
+                                                                                   @foreach($barang as $records2)
+                                                                                    <option>{{$records2->nama_barang}}</option>
+                                                                                   @endforeach
+
+<!--                                                                                    chosen-select 
+ -->                                                                        
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group ">
-                                                                    <label for="card-number" class="form-label">Nama Barang / Jasa</label>
+                                                                    <label for="card-number" class="form-label">Kode Jasa / Nama Jasa</label>
                                                                     <div class="row">
                                                                     <div class="form-group form-inline  ">
                                                                        
                                                                         <div class="col-sm-6">
-                                                                        <select id="nama_barang" onchange="ajaxGenerateKodeBarang('nama')" name="nama" type="text" data-placeholder=" "  class="chosen-select form-control" tabindex="-1">
-                                                                                <option> </option>
-                                                                               @foreach($barang as $records2)
-                                                                                <option>{{$records2->nama_barang}}</option>
-                                                                               @endforeach
-                                                                    
-                                                                        </select>
+                                                                            
+                                                                            <input id="kode_jasa" onkeyup="ajaxGenerateKodeJasa('kode')" name="kode_jasa" type="text" class="form-control" readonly="">
 
                                                                         </div>
                                                                         
                                                                          <div class="col-sm-6">
-                                                                        <select id="nama_jasa" onchange="ajaxGenerateKodeJasa('nama')" name="nama_jasa" type="text" data-placeholder=" "  class="chosen-select form-control" tabindex="-1">
-                                                                                <option> </option>
+                                                                        <select id="nama_jasa" onchange="ajaxGenerateKodeJasa('nama')" name="nama_jasa" type="text" data-placeholder=" "  class="form-control" style="width:222px">
+                                                                               <option> </option>
                                                                                @foreach($jasa as $records2)
-                                                                                <option v>{{$records2->jenis_jasa}}</option>
+                                                                                <option>{{$records2->jenis_jasa}}</option>
                                                                                @endforeach
                                                                     
                                                                         </select>
+                                                                        <!--                                                                                    chosen-select 
+ -->                                                                        
                                                                         </div>
                                                                     </div>
                                                                     </div>

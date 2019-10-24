@@ -16,7 +16,22 @@ public function index()
 		$no_urut = DB::select( DB::raw("SELECT concat(nomor) AS no_urut from(select case  when nomor IS NULL THEN '1' ELSE  nomor end  AS nomor  from (SELECT MAX(id+1) as nomor FROM `pelanggan`) abc) bca"));		
 		$data = DB::table('tempat_servis')->where('status','KOSONG')->get();
 		$merek = DB::table('merek')->get();
-		return view('kasir/index',['data'=>$data,'merek'=>$merek],['no_urut'=>$no_urut]);
+		$tipe = DB::table('tipe_kendaraan')->get();
+		$warna = DB::table('warna')->get();
+
+		$validasi = DB::select("SELECT *,COUNT(id)as total FROM `tempat_servis` WHERE STATUS = 'KOSONG'");
+
+		foreach ($validasi as $value) {
+            $cek = $value->total;
+        }
+  		
+  		    if ($cek>=1) {
+           	   $cek='';
+           	}else{
+           		$cek='disabled';
+           	};
+/*  		dd($cek);
+*/		return view('kasir/index',['data'=>$data,'merek'=>$merek,'cek'=>$cek,'no_urut'=>$no_urut,'tipe'=>$tipe,'warna'=>$warna]);
  	}
 
 public function ajaxGenerateDataNopol($id){
@@ -25,6 +40,16 @@ public function ajaxGenerateDataNopol($id){
         $response = ['data' => $data];
         return json_encode($response);
     }
+
+ public function ajaxGenerateDataMerek($id){
+        //
+        $data = DB::select("SELECT tipe FROM tipe_kendaraan WHERE merek = '$id'");
+        $response = ['data' => $data];
+
+        return json_encode($response);
+
+
+	}   
 
 
 public function detail_pelanggan()

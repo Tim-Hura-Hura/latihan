@@ -137,7 +137,7 @@
                                 </a>
                             <ul class="submenu-angle" aria-expanded="true">
                                  <li><a title="Inbox" href="{{url('kasir_jasa')}}"><i class="fa fa-wrench sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Master Jasa</span></a></li>
-                                 <li><a title="View Mail" href="{{url('kasir_tempat_servis')}}"><i class="fa fa-align-justify   sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Tempat Servis</span></a></li>
+                                 <li><a title="View Mail" href="{{url('kasir_tempat_servis')}}"><i class="fa fa-align-justify   sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Station Servis</span></a></li>
                             
                             </ul>
                         </li>

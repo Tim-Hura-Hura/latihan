@@ -56,6 +56,12 @@
                             Please check the form below for errors
                         </div>
                         @endif
+
+
+
+                         
+
+             
                          
                             <div id="example-basic">
                                 <h3>Data Kendaraan</h3>
@@ -72,14 +78,18 @@
                                             <div class="review-content-section">
                                         <div class="form-group">
                                             <label for="card-number" class="form-label">Tempat Servis</label>
-                                            <select id="tempat_servis" name="tempat_servis" type="text" class="form-control" style="float: right;">
+                                            <select id="tempat_servis" name="tempat_servis" type="text" class="form-control" style="float: right;" {{$cek}} >
                                                @foreach ($data as $dt)  
-                                                <option >{{$dt->id}}</option>
+                                                <option >{{$dt->id}} </option>
+
+
                                                @endforeach
                                             </select>
                                         </div>
                                            </div>
                                         </div>
+
+
 
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
@@ -88,15 +98,14 @@
                                              <label for="card-number" class="form-label">Nopol</label>
                                                 <div class="row">
                                                 <div class="col-md-4">
-                                                    <input id="nopol1" name="nopol1" type="text" maxlength="2" class="form-control" required="" onchange="ajaxGenerateNopol()" onkeyup="this.value = this.value.toUpperCase()">
+                                                    <input id="nopol1" name="nopol1" type="text" maxlength="2" class="form-control" required="" onchange="ajaxGenerateNopol()" onkeyup="this.value = this.value.toUpperCase()" {{$cek}} >
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="nopol2" name="nopol2" type="text" class="form-control" maxlength="4" required="" onkeypress="return isNumberKey(event)" onchange="ajaxGenerateNopol()">
+                                                    <input id="nopol2" name="nopol2" type="text" class="form-control" maxlength="4" required="" onkeypress="return isNumberKey(event)" onchange="ajaxGenerateNopol()" {{$cek}}>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="nopol3" name="nopol3" type="text" class="form-control" required="" maxlength="3" onchange="ajaxGenerateNopol()" onkeyup="this.value = this.value.toUpperCase()">
+                                                    <input id="nopol3" name="nopol3" type="text readonly" class="form-control" required="" maxlength="3" onchange="ajaxGenerateNopol()" onkeyup="this.value = this.value.toUpperCase()" {{$cek}}>
                                                 </div>
-                                                  <!--   <input id="nopol" name="nopol" type="text" class="form-control" onkeyup="ajaxGenerateNopol()" ></input> -->
                                                 
                                                 </div>                      
                                             </div>
@@ -105,7 +114,7 @@
                                             <div class="review-content-section">
                                                 <div class="form-group">
                                                     <label for="card-number" class="form-label">No Mesin</label>
-                                                    <input id="no_mesin" name="no_mesin" type="text" class="form-control">
+                                                    <input id="no_mesin" name="no_mesin" type="text" class="form-control" {{$cek}}>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,10 +122,10 @@
                                             <div class="review-content-section">
                                                  <div class="form-group">
                                                     <label for="card-number" class="form-label">Merek Kendaraan</label>
-                                                    <select data-placeholder=" "  class="chosen-select form-control" tabindex="-1" id="merek" name="merek">
-                                                                        
+                                                    
+                                                    <select class="form-control" tabindex="-1" id="merek" name="merek" {{$cek}}>
                                                         <option> </option>
-                                                        @foreach ($merek as $mk)
+                                                        @foreach ($merek as $mk)             
                                                         <option>{{$mk -> merek}}</option>
                                                         @endforeach
 
@@ -132,7 +141,15 @@
                                             <div class="review-content-section">
                                         <div class="form-group">
                                             <label for="address" class="form-label">Tipe Kendaraan</label>
-                                            <input id="tipe" name="tipe" type="text" class="form-control">
+                                                <select class=" form-control" tabindex="-1" id="tipe" name="tipe" {{$cek}}>
+                                                            <option> </option>
+                                                    
+                                                        @foreach ($tipe as $mk)             
+                                                            <option>{{$mk -> tipe}}</option>
+                                                        @endforeach          
+                                                
+                                                </select>
+
                                         </div>
                                     </div>
                                         </div>
@@ -140,7 +157,14 @@
                                             <div class="review-content-section">
                                          <div class="form-group">
                                             <label for="phone-2" class="form-label">Warna</label>
-                                            <input id="warna" name="warna" type="text" class="form-control phone">
+                                            <select class="form-control" tabindex="-1" id="warna" name="warna" {{$cek}}>
+                                                            <option> </option>
+                                                    
+                                                        @foreach ($warna as $mk)             
+                                                            <option>{{$mk -> warna}}</option>
+                                                        @endforeach          
+                                                
+                                                </select>
                                         </div>
                                     </div>
                                    </div>
@@ -148,7 +172,7 @@
                                             <div class="review-content-section">
                                         <div class="form-group">
                                             <label for="city" class="form-label">Keluhan</label>
-                                            <textarea id="keluhan" name="keluhan" type="text" class="form-control"> </textarea>
+                                            <textarea id="keluhan" name="keluhan" type="text" class="form-control" {{$cek}}> </textarea>
                                             
                                         </div>
                                     </div>
@@ -164,17 +188,17 @@
                                     <div class="payment-details">
                                         <div class="form-group mg-t-15">
                                             <label for="card-number" class="form-label">Nama Pelanggan</label>
-                                            <input id="nama" class="form-control" type="text" name="nama">
+                                            <input id="nama" class="form-control" type="text" name="nama" {{$cek}}>
                                         </div>
                     
                                         <div class="form-group mg-t-15">
                                             <label for="card-number" class="form-label">No Telepon (62)</label>
-                                            <input id="hp" class="form-control" type="text" name="hp">
+                                            <input id="hp" class="form-control" type="text" name="hp" maxlength="13" required="" onkeypress="return isNumberKey(event)" {{$cek}}>
                                         </div>  
 
                                         <div class="form-group">
                                             <label for="promotional-code" class="control-label">Alamat</label>
-                                             <textarea id="alamat" class="form-control" type="text" name="alamat"> </textarea>
+                                             <textarea id="alamat" class="form-control" type="text" name="alamat" {{$cek}}> </textarea>
                                         </div>
 
                                        
@@ -203,12 +227,46 @@
 @endsection
 
 <script type="text/javascript">
+        function ajaxGenerateMerek() {
+
+
+            var id = document.getElementById('merek').value;
+
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                method: "GET",
+                url: "ajax/pelgenerateMerek/" + id,
+                dataType: "json",
+                data: {_token: _token},
+                success: function (data) 
+                {
+                    console.log();
+                    if (data['data'].length > 0) {
+                        $("#tipe").val(data['data'][0].tipe);
+                   
+                    } else {
+                        $("#tipe").val('');
+          
+                    }
+
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+        
+    </script>
+
+
+ <script type="text/javascript">
         function ajaxGenerateNopol() {
 
 
             var str1 = document.getElementById('nopol1').value;
-            var str2 = document.getElementById('nopol2').value
-            var str3 = document.getElementById('nopol3').value
+            var str2 = document.getElementById('nopol2').value;
+            var str3 = document.getElementById('nopol3').value;
             var link_id = str1 +" "+ str2 +" "+ str3;
 
             var _token = $('input[name="_token"]').val();
