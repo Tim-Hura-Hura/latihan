@@ -1,3 +1,6 @@
+ 
+
+
 @extends ('master.kasir')
 
 
@@ -225,6 +228,12 @@
 		
 
 @endsection
+
+
+<script type="text/javascript"> 
+/*    $(document).ready(function() {     
+    $('#merek').select2(); });*/
+</script>
 
 <script type="text/javascript">
         function ajaxGenerateMerek() {

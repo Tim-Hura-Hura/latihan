@@ -7,21 +7,17 @@
     <title>Bengkel Lancar Jaya</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="csrf-token" content="{{csrf_token()}}">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <!-- favicon
     ============================================ -->
 
     <!-- Google Fonts
     ============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
-    <link href="{{asset('assets/css/sweetalert.css')}}" rel="stylesheet">
-    <link rel="stylesheet"  href="{{asset('assets/css/select2/select2.min.css')}}">
+         <link  href="{{asset('assets/css/sweetalert.css')}}" rel="stylesheet">
     <!-- Bootstrap CSS
     ============================================ -->
     <link rel="stylesheet"  href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet"  href="{{asset('assets/css/ilmudetil.css')}}">
-
-    <link rel="stylesheet"  href="{{asset('assets/css/chosen/bootstrap-chosen.css')}}">
     <!-- Bootstrap CSS
     ============================================ -->
     <link rel="stylesheet"  href="{{asset('assets/css/font-awesome.min.css')}}">
@@ -30,9 +26,6 @@
     <link rel="stylesheet"  href="{{asset('assets/css/owl.carousel.css')}}">
     <link rel="stylesheet"  href="{{asset('assets/css/owl.theme.css')}}">
     <link rel="stylesheet"  href="{{asset('assets/css/owl.transitions.css')}}">
-       <!-- touchspin CSS
-        ============================================ -->
-    <link rel="stylesheet" href="{{asset('assets/css/touchspin/jquery.bootstrap-touchspin.min.css')}}">
     <!-- animate CSS
     ============================================ -->
     <link rel="stylesheet"  href="{{asset('assets/css/animate.css')}}">
@@ -59,6 +52,7 @@
     ============================================ -->
     <link rel="stylesheet"  href="{{asset('assets/css/calendar/fullcalendar.min.css')}}">
     <link rel="stylesheet"  href="{{asset('assets/css/calendar/fullcalendar.print.min.css')}}">
+    <link rel="stylesheet"  href="{{asset('assets/css/form/all-type-forms.css')}}">
         <!-- modals CSS
         ============================================ -->
     <link rel="stylesheet" href="{{asset('assets/css/modals.css')}}">
@@ -68,14 +62,10 @@
     <!-- responsive CSS
     ============================================ -->
     <link rel="stylesheet"  href="{{asset('assets/css/responsive.css')}}">
-     <!-- notifications CSS
-        ============================================ -->
-    <link rel="stylesheet" href="{{asset('assets/css/notifications/Lobibox.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/notifications/notifications.css')}}">
       <!-- x-editor CSS
         ============================================ -->
-<!--     <link rel="stylesheet" href="{{asset('assets/css/editor/select2.css')}}">
- -->    <link rel="stylesheet" href="{{asset('assets/css/editor/datetimepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/editor/select2.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/editor/datetimepicker.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/editor/bootstrap-editable.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/editor/x-editor-style.css')}}">
      <!-- normalize CSS
@@ -106,42 +96,56 @@
                         
                         
                         <li>
-                            <a class="has-arrow" href="{{url('kasir_pelanggan')}}">
+                            <a class="has-arrow" href="{{url('admin_detail_pelanggan')}}">
                                    <i class="fa big-icon fa-users icon-wrap"></i>
                                    <span class="mini-click-non">Data Pelanggan</span>
                                 </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                <li><a title="Landing Page" href="{{url('kasir_pelanggan')}}" aria-expanded="false"><i class="fa fa-plus icon-wrap sub-icon-mg" aria-hidden="true"></i> <span class="mini-click-non">Pelanggan & Kendaraan</span></a>
-                                </li> 
-                                 <li><a title="View Mail" href="{{url('kasir_detail_pelanggan')}}"><i class="fa fa-user sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Pelanggan</span></a></li>
-                                 <li><a title="View Mail" href="{{url('kasir_kendaraan')}}"><i class="fa fa-motorcycle sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Kendaraan</span></a></li>
+                                 <li><a title="View Mail" href="{{url('admin_detail_pelanggan')}}"><i class="fa fa-user sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Pelanggan</span></a></li>
+                                 <li><a title="View Mail" href="{{url('admin_detail_kendaraan')}}"><i class="fa fa-motorcycle sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Kendaraan</span></a></li>
                             
                             </ul>
-                        </li>    
+                        </li> 
+
                         <li>
-                            <a class="has-arrow" href="{{url('kasir_penjualan')}}">
-                                   <i class="fa big-icon fa-list-alt icon-wrap"></i>
-                                   <span class="mini-click-non">Data Transaksi</span>
+                            <a class="has-arrow" href="{{url('admin_barang')}}">
+                                   <i class="fa big-icon fa-dropbox   icon-wrap"></i>
+                                   <span class="mini-click-non">Data Sparepart</span>
                                 </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                 <li><a title="Inbox" href="{{url('kasir_penjualan')}}"><i class="fa fa-shopping-cart sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Penjualan</span></a></li>
-                                 <li><a title="View Mail" href="{{url('kasir_detail')}}"><i class="fa fa-list-ol sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Penjualan</span></a></li>
-                                 <li><a title="View Mail" href="{{url('kasir_kendaraan_histori')}}"><i class="fa fa-motorcycle sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Histori Kendaraan</span></a></li>
-                            
+                                <li><a title="Landing Page" href="{{url('admin_barang')}}" aria-expanded="false"><i class="fa fa-cube icon-wrap sub-icon-mg" aria-hidden="true"></i> <span class="mini-click-non">Master Barang</span></a>
+                                </li> 
+                                 <li><a title="View Mail" href="{{url('admin_stok')}}"><i class="fa fa-th-large  sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Stok</span></a></li>                            
                             </ul>
                         </li>
+                        
                         <li>
-                            <a class="has-arrow" href="{{url('kasir_jasa')}}">
+                            <a class="has-arrow" href="{{url('admin_jasa')}}">
                                    <i class="fa big-icon fa-th-list icon-wrap"></i>
                                    <span class="mini-click-non">Data Jasa</span>
                                 </a>
                             <ul class="submenu-angle" aria-expanded="true">
-                                 <li><a title="Inbox" href="{{url('kasir_jasa')}}"><i class="fa fa-wrench sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Master Jasa</span></a></li>
-                                 <li><a title="View Mail" href="{{url('kasir_tempat_servis')}}"><i class="fa fa-align-justify   sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Station Servis</span></a></li>
+                                 <li><a title="Inbox" href="{{url('admin_jasa')}}"><i class="fa fa-wrench sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Master Jasa</span></a></li>
+                                 <li><a title="View Mail" href="{{url('admin_tempat_servis')}}"><i class="fa fa-align-justify   sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Tempat Servis</span></a></li>
                             
                             </ul>
                         </li>
-                         <li><a title="Landing Page" href="{{url('kasir_lane')}}" aria-expanded="false"><i class="fa fa-bars  icon-wrap sub-icon-mg" aria-hidden="true"></i> <span class="mini-click-non">Lane Aktif</span></a></li>
+
+                        <li>
+                            <a class="has-arrow" href="{{url('admin_transaksi')}}">
+                                   <i class="fa big-icon fa-list-alt icon-wrap"></i>
+                                   <span class="mini-click-non">Laporan</span>
+                                </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                 <li><a title="Inbox" href="{{url('admin_laporan_pembelian')}}"><i class="fa fa-shopping-cart sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Pembelian</span></a></li>
+                                 <li><a title="View Mail" href="{{url('admin_laporan_penjualan')}}"><i class="fa fa-outdent  sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Penjualan</span></a></li>
+                            
+                            </ul>
+                        </li>
+
+                        <li><a title="Landing Page" href="{{url('admin_pegawai')}}" aria-expanded="false"><i class="fa fa-user  icon-wrap sub-icon-mg" aria-hidden="true"></i> <span class="mini-click-non">Data Pegawai</span></a></li>    
+
+
                        
                     </ul>
                 </nav>
@@ -188,10 +192,12 @@
                                                             <i class="fa fa-angle-down adminpro-icon adminpro-down-arrow"></i>
                                                         </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                       
                                                         <li><a><input type="hidden" style="width: 0px; height: 0px;"></input></a></li>
 
                                                          <li><a href="{{url('logout')}}"><span class="fa fa-home author-log-ic"></span>Keluar</a>
                                                         </li>
+
                                                 
                                                     </ul>
                                                 </li>
@@ -213,43 +219,15 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">
-                                      
-                                        <li>
-                                            <a class="has-arrow" href="{{url('kasir_pelanggan')}}">
-                                                   <i class="fa big-icon fa-users icon-wrap"></i>
-                                                   <span class="mini-click-non">Data Pelanggan</span>
-                                                </a>
-                                            <ul class="submenu-angle" aria-expanded="true">
-                                                <li><a title="Landing Page" href="{{url('kasir_pelanggan')}}" aria-expanded="false"><i class="fa fa-plus icon-wrap sub-icon-mg" aria-hidden="true"></i> <span class="mini-click-non">Pelanggan & Kendaraan</span></a>
-                                                </li> 
-                                                 <li><a title="View Mail" href="{{url('kasir_detail_pelanggan')}}"><i class="fa fa-user sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Pelanggan</span></a></li>
-                                                 <li><a title="View Mail" href="{{url('kasir_kendaraan')}}"><i class="fa fa-motorcycle sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Kendaraan</span></a></li>
-                                            
-                                            </ul>
-                                        </li>    
-                                        <li>
-                                            <a class="has-arrow" href="{{url('kasir_penjualan')}}">
-                                                   <i class="fa big-icon fa-list-alt icon-wrap"></i>
-                                                   <span class="mini-click-non">Data Transaksi</span>
-                                                </a>
-                                            <ul class="submenu-angle" aria-expanded="true">
-                                                 <li><a title="Inbox" href="{{url('kasir_penjualan')}}"><i class="fa fa-shopping-cart sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Penjualan</span></a></li>
-                                                 <li><a title="View Mail" href="{{url('kasir/detail')}}"><i class="fa fa-list-ol sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Penjualan</span></a></li>
-                                            
+                                       <li><a title="Landing Page" href="{{url('kasir/index')}}" aria-expanded="false"><i class="fa fa-bookmark icon-wrap sub-icon-mg" aria-hidden="true"></i> <span class="mini-click-non">Data Service</span></a></li>
+
+                         <li><a title="Landing Page" href="#" aria-expanded="false"><i class="fa fa-bookmark icon-wrap sub-icon-mg" aria-hidden="true"></i> Transaksi<span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                                            <ul id="demo" class="collapse dropdown-header-top">
+                                                 <li><a title="Inbox" href="{{url('kasir/transaksi')}}"><i class="fa fa-inbox sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Data Transaksi</span></a></li>
+                                                 <li><a title="View Mail" href="{{url('kasir/detail')}}"><i class="fa fa-television sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Detail Transaksi</span></a></li>
+
                                             </ul>
                                         </li>
-                                        <li>
-                                            <a class="has-arrow" href="{{url('kasir_jasa')}}">
-                                                   <i class="fa big-icon fa-th-list icon-wrap"></i>
-                                                   <span class="mini-click-non">Data Jasa</span>
-                                                </a>
-                                            <ul class="submenu-angle" aria-expanded="true">
-                                                 <li><a title="Inbox" href="{{url('kasir_jasa')}}"><i class="fa fa-wrench sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Master Jasa</span></a></li>
-                                                 <li><a title="View Mail" href="{{url('kasir_tempat_servis')}}"><i class="fa fa-align-justify   sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Tempat Servis</span></a></li>
-                                            
-                                            </ul>
-                                        </li>
-                                      
                                     </ul>
                                 </nav>
                             </div>
@@ -272,7 +250,7 @@
                 </div>
             </div>
         </div>
-        
+
           @yield('content')
        
         <div class="footer-copyright-area">
@@ -287,13 +265,9 @@
             </div>
         </div>
     </div>
-    
+<script src="{{asset('assets/js/highcharts.js')}}"></script>
+<script src="{{asset('assets/js/modules/exporting.js')}}"></script>     
 
-    
-
-     <!-- <script src="{{asset('assets/js/highcharts.js')}}"></script> -->
-     <script src="{{asset('assets/js/jquery-1.10.1.min.js')}}"></script>
-    
        <script src="{{asset('assets/js/sweetalert.js')}}"></script>
         @include('sweet::alert')
      <!-- jquery
@@ -324,11 +298,6 @@
         ============================================ -->
     <script src="{{asset('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js')}}"></script>
     <script src="{{asset('assets/js/scrollbar/mCustomScrollbar-active.js')}}"></script>
-    <script src="{{asset('assets/js/rangle-slider/jquery-ui-touch-punch.min.js')}}"></script>
-    <!-- touchspin JS
-        ============================================ -->
-    <script src="{{asset('assets/js/touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
-    <script src="{{asset('assets/js/touchspin/touchspin-active.js')}}"></script>
     <!-- metisMenu JS
         ============================================ -->
     <script src="{{asset('assets/js/metisMenu/metisMenu.min.js')}}"></script>
@@ -347,24 +316,19 @@
         ============================================ -->
     <script src="{{asset('assets/js/editable/jquery.mockjax.js')}}"></script>
     <script src="{{asset('assets/js/editable/mock-active.js')}}"></script>
-<!--     <script src="{{asset('assets/js/editable/select2.js')}}"></script>
- -->    <script src="{{asset('assets/js/editable/moment.min.js')}}"></script>
+    <script src="{{asset('assets/js/editable/select2.js')}}"></script>
+    <script src="{{asset('assets/js/editable/moment.min.js')}}"></script>
     <script src="{{asset('assets/js/editable/bootstrap-datetimepicker.js')}}"></script>
     <script src="{{asset('assets/js/editable/bootstrap-editable.js')}}"></script>
     <script src="{{asset('assets/js/editable/xediable-active.js')}}"></script>
     <!-- Chart JS
         ============================================ -->
-    <script src="js/chart/jquery.peity.min.js')}}"></script>
-    <script src="js/peity/peity-active.js')}}"></script>
+    <script src="{{asset('assets/js/chart/jquery.peity.min.js')}}"></script>
+    <script src="{{asset('assets/js/peity/peity-active.js')}}"></script>
     <!-- morrisjs JS
         ============================================ -->
     <script src="{{asset('assets/js/sparkline/jquery.sparkline.min.js')}}"></script>
     <script src="{{asset('assets/js/sparkline/jquery.charts-sparkline.js')}}"></script>
-    <script src="{{asset('assets/js/Chart.js')}}"></script>
-     <!-- notification JS
-        ============================================ -->
-    <script src="{{asset('assets/js/notifications/Lobibox.js')}}"></script>
-    <script src="{{asset('assets/js/notifications/notification-active.js')}}"></script>
     <!-- calendar JS
         ============================================ -->
     <script src="{{asset('assets/js/calendar/moment.min.js')}}"></script>
@@ -380,18 +344,22 @@
     <!-- plugins JS
         ============================================ -->
     <script src="{{asset('assets/js/plugins.js')}}"></script>
-        <!-- chosen JS
-        ============================================ -->
-    <script src="{{asset('assets/js/chosen/chosen.jquery.js')}}"></script>
-    <script src="{{asset('assets/js/chosen/chosen-active.js')}}"></script>
     <!-- main JS
         ============================================ -->
     <script src="{{asset('assets/js/main.js')}}"></script>
+        <!-- pwstrength JS
+        ============================================ -->
+    <script src="{{asset('assets/js/password-meter/pwstrength-bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/password-meter/zxcvbn.js')}}"></script>
+    <script src="{{asset('assets/js/password-meter/password-meter-active.js')}}"></script>
+      <!-- icheck JS
+        ============================================ -->
+    <script src="{{asset('assets/js/icheck/icheck.min.js')}}"></script>
+    <script src="{{asset('assets/js/icheck/icheck-active.js')}}"></script>
+        <!-- datapicker JS
+        ============================================ -->
     <script src="{{asset('assets/js/datapicker/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('assets/js/datapicker/datepicker-active.js')}}"></script>
-
-    <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
-    <script src="{{asset('assets/js/select2/select2-active.js')}}"></script>
 </body>
 
 </html>

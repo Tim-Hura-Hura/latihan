@@ -61,3 +61,7 @@ Route::get('ajax_pmb/generateKodeBarang/{id}', 'PembelianController@ajaxGenerate
 Route::post('ajax_pmb/tambahDetail', 'PembelianController@ajaxTambahDetail');
 Route::get('ajax_pmb/generateDetail/{id}', 'PembelianController@generateDetail')->where('id', '(.*)');
 
+//login
+Route::post('/logindata', 'LoginController@masuk');
+Route::resource('login', 'LoginController@index');
+Route::resource('logout', 'LoginController@logout');
