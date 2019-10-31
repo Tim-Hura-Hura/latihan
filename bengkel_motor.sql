@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2019 at 07:07 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Waktu pembuatan: 31 Okt 2019 pada 16.27
+-- Versi server: 10.1.31-MariaDB
+-- Versi PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang`
+-- Struktur dari tabel `barang`
 --
 
 CREATE TABLE `barang` (
@@ -34,7 +34,7 @@ CREATE TABLE `barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `barang`
+-- Dumping data untuk tabel `barang`
 --
 
 INSERT INTO `barang` (`kode_barang`, `nama_barang`) VALUES
@@ -53,7 +53,7 @@ INSERT INTO `barang` (`kode_barang`, `nama_barang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_pembelian`
+-- Struktur dari tabel `detail_pembelian`
 --
 
 CREATE TABLE `detail_pembelian` (
@@ -68,14 +68,14 @@ CREATE TABLE `detail_pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `detail_pembelian`
+-- Dumping data untuk tabel `detail_pembelian`
 --
 
 INSERT INTO `detail_pembelian` (`id`, `id_nota`, `nama_barang`, `harga_beli`, `harga_jual`, `jumlah`, `sub_total`, `suplier`) VALUES
 (1, 'PMB_17102019_001', 'Oli Mesran', 35000, 40000, 2, 70000, 'Pak Anas');
 
 --
--- Triggers `detail_pembelian`
+-- Trigger `detail_pembelian`
 --
 DELIMITER $$
 CREATE TRIGGER `pembelian_kurang` AFTER DELETE ON `detail_pembelian` FOR EACH ROW BEGIN
@@ -93,7 +93,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_penjualan`
+-- Struktur dari tabel `detail_penjualan`
 --
 
 CREATE TABLE `detail_penjualan` (
@@ -107,7 +107,7 @@ CREATE TABLE `detail_penjualan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `detail_penjualan`
+-- Dumping data untuk tabel `detail_penjualan`
 --
 
 INSERT INTO `detail_penjualan` (`id`, `id_nota`, `nama_barang_jasa`, `harga_beli`, `harga_jual`, `jumlah`, `sub_total`) VALUES
@@ -119,7 +119,7 @@ INSERT INTO `detail_penjualan` (`id`, `id_nota`, `nama_barang_jasa`, `harga_beli
 (6, 'PNJ_24102019_002', 'Oli gardan', 10000, 15000, 2, 30000);
 
 --
--- Triggers `detail_penjualan`
+-- Trigger `detail_penjualan`
 --
 DELIMITER $$
 CREATE TRIGGER `penjualan_kurang` AFTER INSERT ON `detail_penjualan` FOR EACH ROW BEGIN
@@ -137,7 +137,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jasa`
+-- Struktur dari tabel `jasa`
 --
 
 CREATE TABLE `jasa` (
@@ -147,7 +147,7 @@ CREATE TABLE `jasa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `jasa`
+-- Dumping data untuk tabel `jasa`
 --
 
 INSERT INTO `jasa` (`id_jasa`, `jenis_jasa`, `harga`) VALUES
@@ -158,7 +158,7 @@ INSERT INTO `jasa` (`id_jasa`, `jenis_jasa`, `harga`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kendaraan`
+-- Struktur dari tabel `kendaraan`
 --
 
 CREATE TABLE `kendaraan` (
@@ -175,7 +175,7 @@ CREATE TABLE `kendaraan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kendaraan`
+-- Dumping data untuk tabel `kendaraan`
 --
 
 INSERT INTO `kendaraan` (`id`, `nopol`, `no_mesin`, `merek`, `tipe`, `warna`, `keluhan`, `status`, `id_pelanggan`, `id_tempat_servis`) VALUES
@@ -186,7 +186,7 @@ INSERT INTO `kendaraan` (`id`, `nopol`, `no_mesin`, `merek`, `tipe`, `warna`, `k
 -- --------------------------------------------------------
 
 --
--- Table structure for table `merek`
+-- Struktur dari tabel `merek`
 --
 
 CREATE TABLE `merek` (
@@ -195,7 +195,7 @@ CREATE TABLE `merek` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `merek`
+-- Dumping data untuk tabel `merek`
 --
 
 INSERT INTO `merek` (`no`, `merek`) VALUES
@@ -214,7 +214,7 @@ INSERT INTO `merek` (`no`, `merek`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pegawai`
+-- Struktur dari tabel `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -225,7 +225,7 @@ CREATE TABLE `pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pegawai`
+-- Dumping data untuk tabel `pegawai`
 --
 
 INSERT INTO `pegawai` (`id`, `nama`, `password`, `status`) VALUES
@@ -237,7 +237,7 @@ INSERT INTO `pegawai` (`id`, `nama`, `password`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pelanggan`
+-- Struktur dari tabel `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
@@ -248,7 +248,7 @@ CREATE TABLE `pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pelanggan`
+-- Dumping data untuk tabel `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`id`, `nama`, `hp`, `alamat`) VALUES
@@ -259,7 +259,7 @@ INSERT INTO `pelanggan` (`id`, `nama`, `hp`, `alamat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pembelian`
+-- Struktur dari tabel `pembelian`
 --
 
 CREATE TABLE `pembelian` (
@@ -271,7 +271,7 @@ CREATE TABLE `pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pembelian`
+-- Dumping data untuk tabel `pembelian`
 --
 
 INSERT INTO `pembelian` (`id_nota`, `tgl_masuk`, `total_harga`, `bayar`, `kembalian`) VALUES
@@ -280,7 +280,7 @@ INSERT INTO `pembelian` (`id_nota`, `tgl_masuk`, `total_harga`, `bayar`, `kembal
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penjualan`
+-- Struktur dari tabel `penjualan`
 --
 
 CREATE TABLE `penjualan` (
@@ -297,7 +297,7 @@ CREATE TABLE `penjualan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `penjualan`
+-- Dumping data untuk tabel `penjualan`
 --
 
 INSERT INTO `penjualan` (`id_nota`, `nopol`, `tgl_masuk`, `tgl_keluar`, `mekanik`, `penerima`, `total_harga`, `bayar`, `kembalian`, `status`) VALUES
@@ -311,7 +311,7 @@ INSERT INTO `penjualan` (`id_nota`, `nopol`, `tgl_masuk`, `tgl_keluar`, `mekanik
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stok`
+-- Struktur dari tabel `stok`
 --
 
 CREATE TABLE `stok` (
@@ -324,7 +324,7 @@ CREATE TABLE `stok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `stok`
+-- Dumping data untuk tabel `stok`
 --
 
 INSERT INTO `stok` (`id`, `nama_barang`, `jumlah`, `harga_beli`, `harga_jual`, `suplier`) VALUES
@@ -343,7 +343,7 @@ INSERT INTO `stok` (`id`, `nama_barang`, `jumlah`, `harga_beli`, `harga_jual`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tempat_servis`
+-- Struktur dari tabel `tempat_servis`
 --
 
 CREATE TABLE `tempat_servis` (
@@ -352,7 +352,7 @@ CREATE TABLE `tempat_servis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tempat_servis`
+-- Dumping data untuk tabel `tempat_servis`
 --
 
 INSERT INTO `tempat_servis` (`id`, `status`) VALUES
@@ -363,7 +363,7 @@ INSERT INTO `tempat_servis` (`id`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipe_kendaraan`
+-- Struktur dari tabel `tipe_kendaraan`
 --
 
 CREATE TABLE `tipe_kendaraan` (
@@ -373,7 +373,7 @@ CREATE TABLE `tipe_kendaraan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tipe_kendaraan`
+-- Dumping data untuk tabel `tipe_kendaraan`
 --
 
 INSERT INTO `tipe_kendaraan` (`no`, `merek`, `tipe`) VALUES
@@ -470,7 +470,7 @@ INSERT INTO `tipe_kendaraan` (`no`, `merek`, `tipe`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `warna`
+-- Struktur dari tabel `warna`
 --
 
 CREATE TABLE `warna` (
@@ -479,7 +479,7 @@ CREATE TABLE `warna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `warna`
+-- Dumping data untuk tabel `warna`
 --
 
 INSERT INTO `warna` (`no`, `warna`) VALUES
@@ -498,169 +498,169 @@ INSERT INTO `warna` (`no`, `warna`) VALUES
 --
 
 --
--- Indexes for table `barang`
+-- Indeks untuk tabel `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`kode_barang`),
   ADD UNIQUE KEY `nama_barang` (`nama_barang`);
 
 --
--- Indexes for table `detail_pembelian`
+-- Indeks untuk tabel `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `detail_penjualan`
+-- Indeks untuk tabel `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `jasa`
+-- Indeks untuk tabel `jasa`
 --
 ALTER TABLE `jasa`
   ADD PRIMARY KEY (`id_jasa`);
 
 --
--- Indexes for table `kendaraan`
+-- Indeks untuk tabel `kendaraan`
 --
 ALTER TABLE `kendaraan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `merek`
+-- Indeks untuk tabel `merek`
 --
 ALTER TABLE `merek`
   ADD PRIMARY KEY (`no`),
   ADD UNIQUE KEY `merek` (`merek`);
 
 --
--- Indexes for table `pegawai`
+-- Indeks untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pelanggan`
+-- Indeks untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pembelian`
+-- Indeks untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
   ADD PRIMARY KEY (`id_nota`);
 
 --
--- Indexes for table `penjualan`
+-- Indeks untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
   ADD PRIMARY KEY (`id_nota`);
 
 --
--- Indexes for table `stok`
+-- Indeks untuk tabel `stok`
 --
 ALTER TABLE `stok`
   ADD PRIMARY KEY (`id`),
   ADD KEY `nama_barang` (`nama_barang`);
 
 --
--- Indexes for table `tempat_servis`
+-- Indeks untuk tabel `tempat_servis`
 --
 ALTER TABLE `tempat_servis`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tipe_kendaraan`
+-- Indeks untuk tabel `tipe_kendaraan`
 --
 ALTER TABLE `tipe_kendaraan`
   ADD PRIMARY KEY (`no`),
   ADD KEY `merek` (`merek`);
 
 --
--- Indexes for table `warna`
+-- Indeks untuk tabel `warna`
 --
 ALTER TABLE `warna`
   ADD PRIMARY KEY (`no`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `barang`
+-- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
   MODIFY `kode_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `detail_pembelian`
+-- AUTO_INCREMENT untuk tabel `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `detail_penjualan`
+-- AUTO_INCREMENT untuk tabel `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `jasa`
+-- AUTO_INCREMENT untuk tabel `jasa`
 --
 ALTER TABLE `jasa`
   MODIFY `id_jasa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `kendaraan`
+-- AUTO_INCREMENT untuk tabel `kendaraan`
 --
 ALTER TABLE `kendaraan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `merek`
+-- AUTO_INCREMENT untuk tabel `merek`
 --
 ALTER TABLE `merek`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `pegawai`
+-- AUTO_INCREMENT untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `pelanggan`
+-- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `stok`
+-- AUTO_INCREMENT untuk tabel `stok`
 --
 ALTER TABLE `stok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `tipe_kendaraan`
+-- AUTO_INCREMENT untuk tabel `tipe_kendaraan`
 --
 ALTER TABLE `tipe_kendaraan`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
--- AUTO_INCREMENT for table `warna`
+-- AUTO_INCREMENT untuk tabel `warna`
 --
 ALTER TABLE `warna`
   MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tipe_kendaraan`
+-- Ketidakleluasaan untuk tabel `tipe_kendaraan`
 --
 ALTER TABLE `tipe_kendaraan`
   ADD CONSTRAINT `tipe_kendaraan_ibfk_1` FOREIGN KEY (`merek`) REFERENCES `merek` (`merek`) ON DELETE CASCADE ON UPDATE CASCADE;
