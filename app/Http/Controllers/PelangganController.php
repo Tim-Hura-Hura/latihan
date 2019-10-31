@@ -131,4 +131,14 @@ public function update(Request $request, $id)
 		return redirect('kasir_detail_pelanggan')->with(['success' => 'Data Berhasil Dirubah']);		
     }
 
+    public function admin_detail_pelanggan()
+	{
+		if(!Session::get('login'))
+             {
+         return redirect('login');
+             }
+		$data = DB::table('pelanggan')->get();
+		return view('admin/index',['data'=>$data]);
+ 	}	
+
 }

@@ -65,3 +65,18 @@ Route::get('ajax_pmb/generateDetail/{id}', 'PembelianController@generateDetail')
 Route::post('/logindata', 'LoginController@masuk');
 Route::resource('login', 'LoginController@index');
 Route::resource('logout', 'LoginController@logout');
+
+//admin
+Route::resource('admin_detail_pelanggan', 'PelangganController@admin_detail_pelanggan');
+Route::resource('admin_detail_kendaraan', 'KendaraanController@admin_detail_kendaraan');
+Route::resource('admin_barang', 'BarangController@admin_barang');
+Route::resource('admin_stok', 'StokController@admin_stok');
+Route::resource('admin_jasa', 'JasaController@admin_jasa');
+Route::resource('admin_tempat_servis', 'Tempat_Servis_Controller@admin_tempat_servis');
+Route::resource('admin_pegawai', 'PegawaiController');
+Route::resource('admin_laporan_pembelian', 'LaporanPembelianController');
+Route::resource('admin_penjualan_detail_list', 'LaporanPenjualanController@admin_penjualan_detail_list');
+Route::resource('admin_pembelian_detail_list', 'LaporanPembelianController@admin_pembelian_detail_list');
+Route::resource('admin_laporan_pembelian_sort', 'LaporanPembelianController@admin_laporan_pembelian_sort');
+Route::resource('admin_laporan_penjualan', 'LaporanPenjualanController');
+Route::resource('admin_laporan_penjualan_sort', 'LaporanPenjualanController@admin_laporan_penjualan_sort');
