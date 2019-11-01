@@ -50,6 +50,8 @@ Route::resource('gudang_barang', 'BarangController');
 Route::resource('gudang_stok', 'StokController');
 Route::resource('gudang_pembelian', 'PembelianController');
 Route::resource('gudang_detail', 'PembelianController@gudang_detail');
+Route::resource('gudang_detail_sort', 'PembelianController@gudang_detail_sort');
+Route::resource('gudang_detail_list', 'PembelianController@gudang_detail_list');
 Route::resource('gudang_histori_pembelian', 'HistoriController@gudang_histori_pembelian');
 Route::resource('gudang_histori_pembelian_sort', 'HistoriController@gudang_histori_pembelian_sort');
 Route::resource('gudang_histori_penjualan', 'HistoriController@gudang_histori_penjualan');
