@@ -43,7 +43,11 @@ public function update(Request $request, $id)
 		return redirect('gudang_stok')->with(['success' => 'Data Berhasil Dirubah']);   
     }
 
-
-
+public function destroy($id)
+    {
+       	Alert::error('Data Berhasil Dihapus');
+        DB::table('stok')->where('id',$id)->delete();
+		return redirect('gudang_stok')->with(['error' => 'Data Berhasil Dihapus']);     
+    }
    
 }
