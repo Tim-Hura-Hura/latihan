@@ -22,6 +22,27 @@ public function index()
 		return view ('gudang/stok',['data'=>$data,'nama_barang'=>$nama_barang,'stok'=>$stok,'stok2'=>$stok2]);   
  	}
 
+ 	public function edit($id)
+    {	
+    	$nama_barang = DB::select( DB::raw("SELECT * FROM barang"));
+		$data = DB::table('stok')->where('id',$id)->get();
+		return view ('gudang/stok/edit',['data'=>$data],['nama_barang'=>$nama_barang]);   
+    }
+  
+public function update(Request $request, $id)
+    {
+		
+		$nama_barang	= $request->nama_barang; 
+    	$jumlah			= $request->jumlah;
+    	$harga_beli		= $request->harga_beli;
+    	$harga_jual		= $request->harga_jual;
+    	$suplier		= $request->suplier;
+
+		
+		DB::table('stok')->where('id',$id)->update(['nama_barang' => $nama_barang,'jumlah' => $jumlah,'harga_beli' => $harga_beli,'harga_jual' => $harga_jual,'suplier' => $suplier]);
+		return redirect('gudang_stok')->with(['success' => 'Data Berhasil Dirubah']);   
+    }
+
 
 
    
