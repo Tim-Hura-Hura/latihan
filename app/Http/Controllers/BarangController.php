@@ -73,6 +73,17 @@ public function destroy($kode_barang)
         DB::table('barang')->where('kode_barang',$kode_barang)->delete();
 		return redirect('gudang_barang')->with(['success' => 'Data Berhasil Dihapus']); 	 
     }
+    public function admin_barang()
+    {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
+        $data = DB::table('barang')->get();
+        return view ('admin/barang',['data'=>$data]);   
+    }
+
+    
 
 
 
