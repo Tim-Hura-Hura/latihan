@@ -21,33 +21,44 @@ public function index()
 
 		return view ('gudang/stok',['data'=>$data,'nama_barang'=>$nama_barang,'stok'=>$stok,'stok2'=>$stok2]);   
  	}
+ 	public function admin_detail_kendaraan()
+	{
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
+			
+		$data = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.merek,kendaraan.id_tempat_servis,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.hp,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id"));
+		return view('admin/detail_kendaraan',['data'=>$data]);
+ 	}	
 
- 	public function edit($id)
-    {	
-    	$nama_barang = DB::select( DB::raw("SELECT * FROM barang"));
-		$data = DB::table('stok')->where('id',$id)->get();
-		return view ('gudang/stok/edit',['data'=>$data],['nama_barang'=>$nama_barang]);   
-    }
-  
-public function update(Request $request, $id)
-    {
-		
-		$nama_barang	= $request->nama_barang; 
-    	$jumlah			= $request->jumlah;
-    	$harga_beli		= $request->harga_beli;
-    	$harga_jual		= $request->harga_jual;
-    	$suplier		= $request->suplier;
+ 	public function admin_detail_kendaraan_list($id)
+	{
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
+			
+		$data = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.id_tempat_servis,kendaraan.merek,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id where kendaraan.id='$id'"));
+		return view('admin/detail_kendaraan_list',['data'=>$data]);
+ 	}	
 
-		
-		DB::table('stok')->where('id',$id)->update(['nama_barang' => $nama_barang,'jumlah' => $jumlah,'harga_beli' => $harga_beli,'harga_jual' => $harga_jual,'suplier' => $suplier]);
-		return redirect('gudang_stok')->with(['success' => 'Data Berhasil Dirubah']);   
-    }
+/*	public function admin_detail_kendaraan()
+	{
 
-public function destroy($id)
-    {
-       	Alert::error('Data Berhasil Dihapus');
-        DB::table('stok')->where('id',$id)->delete();
-		return redirect('gudang_stok')->with(['error' => 'Data Berhasil Dihapus']);     
-    }
-   
+		$data = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.merek,kendaraan.id_tempat_servis,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.hp,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id"));
+		return view('admin/detail_kendaraan',['data'=>$data]);
+ 	}	
+
+ 	public function admin_detail_kendaraan_list($id)
+	{
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
+			
+		$data = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.id_tempat_servis,kendaraan.merek,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id where kendaraan.id='$id'"));
+		return view('admin/detail_kendaraan_list',['data'=>$data]);
+ 	}	
+   */
 }
