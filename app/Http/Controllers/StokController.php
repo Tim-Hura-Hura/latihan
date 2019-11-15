@@ -51,5 +51,71 @@ public function index()
         $nama_barang = DB::select( DB::raw("SELECT * FROM barang"));
         $data = DB::select( DB::raw("SELECT * FROM stok"));
         return view ('admin/stok',['data'=>$data],['nama_barang'=>$nama_barang]);   
+	}
+
+	public function store(Request $request)
+    {	
+
+        
+    
+    	$nama_barang	= $request->nama_barang; 
+    	$jumlah			= $request->jumlah;
+    	$harga_beli		= $request->harga_beli;
+    	$harga_jual		= $request->harga_jual;
+    	$suplier		= $request->suplier;
+
+        $messages = [
+        'min' => 'Stok Dengan Nama Barang Yang Anda Masukan Sudah Teradaftar',
+        'required' => ':attribute wajib diisi'
+        ];
+
+		
+        $data = DB::table('stok')->where([['nama_barang',$nama_barang]])->get();
+
+        if(count($data) > 0) {
+            $this->validate($request,[
+           'nama_barang' => 'min:10000'
+                ],$messages);
+
+          return redirect('gudang_stok');     
+    
+        }
+
+        else {
+    
+        DB::table('stok')->insert(['nama_barang' => $nama_barang,'jumlah' => $jumlah,'harga_beli' => $harga_beli,'harga_jual' => $harga_jual,'suplier' => $suplier]);
+        return redirect('gudang_stok')->with(['info' => 'Data Berhasil Ditambah']);      
+        }
+
+
+		
+	}
+	
+	public function edit($id)
+    {	
+    	$nama_barang = DB::select( DB::raw("SELECT * FROM barang"));
+		$data = DB::table('stok')->where('id',$id)->get();
+		return view ('gudang/stok/edit',['data'=>$data],['nama_barang'=>$nama_barang]);   
+    }
+  
+public function update(Request $request, $id)
+    {
+		
+		$nama_barang	= $request->nama_barang; 
+    	$jumlah			= $request->jumlah;
+    	$harga_beli		= $request->harga_beli;
+    	$harga_jual		= $request->harga_jual;
+    	$suplier		= $request->suplier;
+
+		
+		DB::table('stok')->where('id',$id)->update(['nama_barang' => $nama_barang,'jumlah' => $jumlah,'harga_beli' => $harga_beli,'harga_jual' => $harga_jual,'suplier' => $suplier]);
+		return redirect('gudang_stok')->with(['success' => 'Data Berhasil Dirubah']);   
+    }
+
+public function destroy($id)
+    {
+       	Alert::error('Data Berhasil Dihapus');
+        DB::table('stok')->where('id',$id)->delete();
+		return redirect('gudang_stok')->with(['error' => 'Data Berhasil Dihapus']);     
     }
 }
