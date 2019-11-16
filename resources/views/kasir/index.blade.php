@@ -126,7 +126,7 @@
                                                  <div class="form-group">
                                                     <label for="card-number" class="form-label">Merek Kendaraan</label>
                                                     
-                                                    <select class="form-control" tabindex="-1" id="merek" name="merek" {{$cek}}>
+                                                    <select class="form-control " tabindex="-1" id="merek" name="merek" {{$cek}} onchange="ajaxGenerateMerek()">
                                                         <option> </option>
                                                         @foreach ($merek as $mk)             
                                                         <option>{{$mk -> merek}}</option>
@@ -144,7 +144,7 @@
                                             <div class="review-content-section">
                                         <div class="form-group">
                                             <label for="address" class="form-label">Tipe Kendaraan</label>
-                                                <select class=" form-control" tabindex="-1" id="tipe" name="tipe" {{$cek}}>
+                                                <select class=" form-control" tabindex="-1" id="tipe" name="tipe" {{$cek}} onchange="ajaxGenerateTipe()">
                                                             <option> </option>
                                                     
                                                         @foreach ($tipe as $mk)             
@@ -266,8 +266,40 @@
             });
         }
         
-    </script>
+</script>
 
+<script type="text/javascript">
+        function ajaxGenerateTipe() {
+
+
+            var id = document.getElementById('tipe').value;
+
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                method: "GET",
+                url: "ajax/pelgenerateTipe/" + id,
+                dataType: "json",
+                data: {_token: _token},
+                success: function (data) 
+                {
+                    console.log();
+                    if (data['data'].length > 0) {
+                        $("#merek").val(data['data'][0].merek);
+                   
+                    } else {
+                        $("#merek").val('');
+          
+                    }
+
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        }
+        
+    </script>
 
  <script type="text/javascript">
         function ajaxGenerateNopol() {

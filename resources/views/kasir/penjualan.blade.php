@@ -81,6 +81,7 @@
                                                                     <label for="card-number" class="form-label">Nama Penerima</label>
                                                                     <input id="penerima" name="penerima" type="text" class="form-control">
                                                                 </div>
+                                                  
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

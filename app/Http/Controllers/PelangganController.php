@@ -18,6 +18,7 @@ public function index()
 		$merek = DB::table('merek')->get();
 		$tipe = DB::table('tipe_kendaraan')->get();
 		$warna = DB::table('warna')->get();
+      
 
 		$validasi = DB::select("SELECT *,COUNT(id)as total FROM `tempat_servis` WHERE STATUS = 'KOSONG'");
 
@@ -30,9 +31,27 @@ public function index()
            	}else{
            		$cek='disabled';
            	};
-/*  		dd($cek);
-*/		return view('kasir/index',['data'=>$data,'merek'=>$merek,'cek'=>$cek,'no_urut'=>$no_urut,'tipe'=>$tipe,'warna'=>$warna]);
+	return view('kasir/index',['data'=>$data,'merek'=>$merek,'cek'=>$cek,'no_urut'=>$no_urut,'tipe'=>$tipe,'warna'=>$warna]);
  	}
+
+ public function ajaxGenerateDataMerek($id){
+        //
+        $data = DB::select("SELECT * FROM tipe_kendaraan WHERE merek = '$id'");
+        $response = ['data' => $data];
+
+        return json_encode($response);
+
+
+	}
+ public function ajaxGenerateDataTipe($id){
+        //
+        $data = DB::select("SELECT * FROM tipe_kendaraan WHERE tipe = '$id'");
+        $response = ['data' => $data];
+
+        return json_encode($response);
+
+
+	}  	   	
 
 public function ajaxGenerateDataNopol($id){
         //
@@ -41,15 +60,7 @@ public function ajaxGenerateDataNopol($id){
         return json_encode($response);
     }
 
- public function ajaxGenerateDataMerek($id){
-        //
-        $data = DB::select("SELECT tipe FROM tipe_kendaraan WHERE merek = '$id'");
-        $response = ['data' => $data];
 
-        return json_encode($response);
-
-
-	}   
 
 
 public function detail_pelanggan()
