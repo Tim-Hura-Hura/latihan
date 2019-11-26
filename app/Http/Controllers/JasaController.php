@@ -72,4 +72,14 @@ public function update(Request $request, $id_jasa)
         DB::table('jasa')->where('id_jasa',$id_jasa)->delete();
 		return redirect('kasir_jasa')->with(['error' => 'Data Berhasil Dihapus']);  
     }
+
+    public function admin_jasa()
+	{
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
+		$data = DB::table('jasa')->get();
+		return view ('admin/jasa',['data'=>$data]);   
+ 	}
 }

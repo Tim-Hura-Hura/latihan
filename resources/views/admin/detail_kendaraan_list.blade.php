@@ -1,4 +1,4 @@
-@extends ('master.kasir')
+@extends ('master.admin')
 
 
 @section ('content')
