@@ -88,9 +88,7 @@ class PenjualanController extends Controller {
 
         $hasil = $laba11-$laba22;
 
-        // dd($laba22);
-        // dd($pemasukan4);
-        // $hasil = $pemasukan4-$pengeluaran2;
+
         return view ('kasir/detail',['data'=>$data,'pemasukan'=>$pemasukan,'pengeluaran'=>$pengeluaran,'hasil'=>$hasil,'pemasukan2'=>$pemasukan2,'pengeluaran2'=>$pengeluaran2,'tgl1'=>$tgl1,'tgl2'=>$tgl2]);  
     }
 
@@ -273,6 +271,11 @@ class PenjualanController extends Controller {
         $delete = DB::select("DELETE FROM `detail_penjualan` WHERE id=:id",['id'=>$id]);
         $detail = DB::select("SELECT k.*,('') as total FROM `detail_penjualan` k WHERE k.id_nota=:id",['id'=>$id_nota]);
         $total = DB::select("select sum(sub_total) as total from detail_penjualan where id_nota=:nota", ['nota' => $id_nota]);
+        if (empty($total)) {
+            # code...
+            $total=0;
+        }
+
         $response = ['detail' => $detail, 'total' => $total];
         // $detail = DB::select("SELECT k.*,(select round(sum(sub_total)/count(id)) from detail_penjualan where id_nota=k.id_nota) as total FROM `detail_penjualan` k WHERE k.id_nota=:id",['id'=>$id_nota]);
 

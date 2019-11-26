@@ -127,6 +127,7 @@
                                                                     
                                                                         </select>
                                                                         <!--                                                                                    chosen-select 
+                                                                        value="0" min="0" onkeyup="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}"
  -->                                                                        
                                                                         </div>
                                                                     </div>
@@ -134,11 +135,11 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="card-number" class="form-label">Jumlah</label>
-                                                                    <input id="jumlah" name="jumlah" type="number" value="0" min="0"  class="form-control">
+                                                                    <input id="jumlah" name="jumlah" type="number" class="form-control" min="0"  >
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="card-number" class="form-label">Harga</label>
-                                                                    <input id="harga" name="harga" type="text" class="form-control" readonly="">
+                                                                    <input id="harga" name="harga" type="text" class="form-control" readonly=""  >
                                                                     <input id="harga_beli" name="hargabeli" type="hidden" class="form-control">
                                                                   
                                                                 </div>
@@ -393,6 +394,9 @@
                             $("#harga_beli").val(data[i].harga_beli);
                        
                             document.getElementById('jumlah').max = data[i].jumlah;
+                            document.getElementById('jumlah').value = data[i].jumlah;
+                            
+                            
                         }
                     },
                     error: function (data) {
@@ -585,7 +589,6 @@
 
 
     </script>
-
 
 
 
