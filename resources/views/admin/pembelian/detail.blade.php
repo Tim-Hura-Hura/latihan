@@ -70,7 +70,10 @@
                                         </thead>
                                         <tbody>
 
-                                         @foreach ($data as $dt)  
+                                         @foreach ($data as $dt)
+                                         <a href="{{url('nota_pembelian',$dt->id_nota)}}"  class="btn btn-success" style="float: right;">
+                                         Cetak Nota</a>  
+                                         <br><br>
                                              @php
                                             
                                                 $harga_jual = $dt->harga_jual;
