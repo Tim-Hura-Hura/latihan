@@ -68,12 +68,20 @@ public function admin_detail_kendaraan()
 	
 public function edit($id)
     {
+    	if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('kendaraan')->where('id',$id)->get();
 		return view ('kasir/kendaraan/edit',['data'=>$data]);   
     }
 
  public function detail($id)
     {	
+    	if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
     	$data = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.id_tempat_servis,kendaraan.merek,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id where kendaraan.id='$id'"));
 		return view ('kasir/kendaraan/detail',['data'=>$data]);   
     }

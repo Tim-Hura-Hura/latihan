@@ -64,7 +64,7 @@
                                                     
                                                       <div class="charts-single-pro responsive-mg-b-30">
                                                             <div class="alert-title">
-                                                                <h2>Laporan Laba Penjualan </h2>
+                                                                <h2>Laporan Laba Pembelian </h2>
                                                             </div>
                                                             <center><div id="canvas-holder" style="width:40%">
                                                             <canvas id="myChart"></canvas>

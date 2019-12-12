@@ -13,6 +13,10 @@ class HistoriController extends Controller
 
 public function gudang_histori_pembelian()
 	{
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		
 		$data = DB::select( DB::raw("SELECT detail_pembelian.nama_barang,detail_pembelian.jumlah,pembelian.tgl_masuk FROM detail_pembelian INNER JOIN pembelian ON detail_pembelian.id_nota = pembelian.id_nota ORDER by tgl_masuk asc"));
 		return view ('gudang/histori_pembelian',['data'=>$data]);   
@@ -20,7 +24,10 @@ public function gudang_histori_pembelian()
 
 public function gudang_histori_pembelian_sort(Request $request)
     {
-
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 
         $tanggal1 = $request->tanggal1;
         $tanggal2 = $request->tanggal2;
@@ -29,6 +36,10 @@ public function gudang_histori_pembelian_sort(Request $request)
     }
 public function gudang_histori_penjualan()
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
        
         $data = DB::select( DB::raw("SELECT detail_penjualan.nama_barang_jasa,detail_penjualan.jumlah,penjualan.tgl_masuk,barang.nama_barang FROM detail_penjualan INNER JOIN penjualan ON detail_penjualan.id_nota = penjualan.id_nota INNER JOIN barang on detail_penjualan.nama_barang_jasa = barang.nama_barang ORDER by tgl_masuk asc"));
         return view ('gudang/histori_penjualan',['data'=>$data]);   
@@ -36,7 +47,10 @@ public function gudang_histori_penjualan()
 
 public function gudang_histori_penjualan_sort(Request $request)
     {
-    
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 
         $tanggal1 = $request->tanggal1;
         $tanggal2 = $request->tanggal2;

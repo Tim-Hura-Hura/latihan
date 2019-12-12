@@ -128,6 +128,10 @@ public function admin_laporan_penjualan_sort(Request $request)
 
 public function edit($id_nota)
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::select( DB::raw("SELECT * from detail_penjualan where id_nota ='$id_nota'"));
         $data2 = DB::select( DB::raw("SELECT total_harga from penjualan where id_nota ='$id_nota'"));   
 		return view ('admin/penjualan/detail',['data'=>$data,'data2'=>$data2]); 
@@ -142,10 +146,11 @@ public function admin_penjualan_detail_list($id_nota)
              }
         $data = DB::select( DB::raw("SELECT * from detail_penjualan where id_nota ='$id_nota'"));
         $data2 = DB::select( DB::raw("SELECT total_harga from penjualan where id_nota ='$id_nota'"));
+        $data3 = DB::select( DB::raw("SELECT id_nota from penjualan where id_nota ='$id_nota'"));
 
          
         // dd($laba);
-        return view ('admin/penjualan/detail',['data'=>$data,'data2'=>$data2]);   
+        return view ('admin/penjualan/detail',['data'=>$data,'data2'=>$data2,'data3'=>$data3]);     
     }
 
    

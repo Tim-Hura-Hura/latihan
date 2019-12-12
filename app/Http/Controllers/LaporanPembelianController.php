@@ -125,6 +125,10 @@ public function admin_laporan_pembelian_sort(Request $request)
 	
 public function edit($id_nota)
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('detail_pembelian')->where('id_nota',$id_nota)->get();
         $data2 = DB::select( DB::raw("SELECT total_harga from pembelian where id_nota ='$id_nota'"));   
 		return view ('admin/pembelian/detail',['data'=>$data,'data2'=>$data2]);    
@@ -132,9 +136,14 @@ public function edit($id_nota)
   
  public function admin_pembelian_detail_list($id_nota)
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
         $data = DB::select( DB::raw("SELECT * from detail_pembelian where id_nota ='$id_nota'"));
         $data2 = DB::select( DB::raw("SELECT total_harga from pembelian where id_nota ='$id_nota'"));
-        return view ('admin/pembelian/detail',['data'=>$data,'data2'=>$data2]);   
+        $data3 = DB::select( DB::raw("SELECT id_nota from pembelian where id_nota ='$id_nota'"));
+        return view ('admin/pembelian/detail',['data'=>$data,'data2'=>$data2,'data3'=>$data3]);   
     }
    
 }

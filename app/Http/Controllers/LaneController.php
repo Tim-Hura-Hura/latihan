@@ -12,13 +12,20 @@ class LaneController extends Controller
 
 public function index()
 	{
-		
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.merek,kendaraan.id_tempat_servis,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.hp,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id where status != 'SELESAI SERVIS' ORDER BY id_tempat_servis ASC"));
 		$data2 = DB::select( DB::raw("SELECT kendaraan.id,kendaraan.status,kendaraan.nopol,kendaraan.no_mesin,kendaraan.merek,kendaraan.id_tempat_servis,kendaraan.tipe,kendaraan.warna,kendaraan.keluhan,pelanggan.hp,pelanggan.nama FROM kendaraan INNER JOIN pelanggan ON kendaraan.id_pelanggan = pelanggan.id where status != 'SELESAI SERVIS' ORDER BY id_tempat_servis ASC"));
 		return view('kasir/lane',['data'=>$data,'data2'=>$data2]);
  	}
  	public function edit($id)
     {
+    	if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('kendaraan')->where('id',$id)->get();
 		return view ('kasir/kendaraan/edit',['data'=>$data]);   
     }

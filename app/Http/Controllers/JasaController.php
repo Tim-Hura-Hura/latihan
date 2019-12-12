@@ -12,6 +12,10 @@ class JasaController extends Controller
 
 public function index()
 	{
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 
 		$data = DB::table('jasa')->get();
 		return view ('kasir/jasa',['data'=>$data]);   
@@ -51,6 +55,10 @@ public function index()
 
 	public function edit($id_jasa)
     {
+    	if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('jasa')->where('id_jasa',$id_jasa)->get();
 		return view ('kasir/jasa/edit',['data'=>$data]);   
     }

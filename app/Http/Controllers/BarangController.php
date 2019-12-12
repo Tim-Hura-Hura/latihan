@@ -12,6 +12,10 @@ class BarangController extends Controller
 
 public function index()
 	{
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('barang')->get();
     $stok = DB::select( DB::raw("SELECT * FROM stok WHERE jumlah <=5"));
     $stok2 = DB::select( DB::raw("SELECT * FROM stok WHERE jumlah <=5"));
@@ -55,6 +59,10 @@ public function index()
 
 	public function edit($kode_barang)
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('barang')->where('kode_barang',$kode_barang)->get();
 		return view ('gudang/barang/edit',['data'=>$data]);   
     }

@@ -10,6 +10,10 @@ use Alert;
 class PembelianController extends Controller {
 
     public function index() {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 
         DB::table('pembelian')->get();
         $generatePMB = DB::select("SELECT concat('PMB','_',DATE_FORMAT(NOW(), '%d%m%Y'),'_',nomor) AS id_nota from (select case  when nomor IS NULL THEN '001' ELSE  nomor end  AS nomor  from (SELECT right(1000+(max(RIGHT(id_nota,3))+1),3) as nomor FROM `pembelian` where tgl_masuk = CURRENT_DATE) abc) bca");
@@ -175,7 +179,10 @@ class PembelianController extends Controller {
     public function gudang_detail()
 
     {
-
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
         
         $data = DB::select( DB::raw("SELECT * from pembelian order by tgl_masuk desc")); 
         $pemasukan = DB::select( DB::raw("SELECT sum(total_harga)as pemasukan FROM penjualan"));
@@ -281,6 +288,10 @@ return view ('gudang/detail',['data'=>$data,'pemasukan'=>$pemasukan,'pengeluaran
 
     public function gudang_detail_list($id_nota)
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
         $data = DB::select( DB::raw("SELECT * from detail_pembelian where id_nota ='$id_nota'"));
         $data2 = DB::select( DB::raw("SELECT total_harga from pembelian where id_nota ='$id_nota'"));
         return view ('gudang/pembelian/detail',['data'=>$data,'data2'=>$data2]);   

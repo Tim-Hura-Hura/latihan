@@ -41,6 +41,10 @@ public function store(Request $request)
 	
 public function edit($id)
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('pegawai')->where('id',$id)->get();
 		return view ('admin/pegawai/edit',['data'=>$data]);   
     }

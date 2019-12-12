@@ -67,9 +67,12 @@
                                         </thead>
                                         <tbody>
 
+                                        @foreach ($data3 as $dt)
+                                          <a href="{{url('nota',$dt->id_nota)}}"  class="btn btn-success" style="float: right;">Cetak Nota</a>
+                                        @endforeach
                                         @foreach ($data as $dt)
-                                        <a href="{{url('nota',$dt->id_nota)}}"  class="btn btn-success" style="float: right;">Cetak Nota</a> 
-                                        <br><br> 
+                             
+                                        <br> 
                                             <tr>
                                             @php
                                             

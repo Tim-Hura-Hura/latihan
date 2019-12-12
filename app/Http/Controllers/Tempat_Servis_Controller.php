@@ -14,7 +14,10 @@ class Tempat_Servis_Controller extends Controller
 
 public function index()
 	{
-		
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('tempat_servis')->get();
 		return view ('kasir/tempat_servis',['data'=>$data]);   
  	}
@@ -32,7 +35,10 @@ public function store(Request $request)
 public function admin_tempat_servis()
 	{
 		
-          
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }  
 		$data = DB::table('tempat_servis')->get();
 		return view ('admin/tempat_servis',['data'=>$data]);   
  	}
@@ -40,6 +46,10 @@ public function admin_tempat_servis()
 	
 public function edit($id)
     {
+    	if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('tempat_servis')->where('id',$id)->get();
 		return view ('kasir/tempat servis/edit',['data'=>$data]);   
     }

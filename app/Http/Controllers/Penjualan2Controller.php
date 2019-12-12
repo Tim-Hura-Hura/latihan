@@ -11,6 +11,11 @@ class Penjualan2Controller extends Controller {
 
 
     public function kasir_penjualan2_edit($nopol) {
+
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
         $data = DB::select("SELECT penjualan.id_nota, penjualan.nopol, penjualan.mekanik, penjualan.penerima from penjualan left JOIN kendaraan on kendaraan.nopol=penjualan.nopol WHERE kendaraan.status='PENDING' AND  penjualan.nopol ='$nopol' AND penjualan.status='PENDING'");
 
         $anu = "";

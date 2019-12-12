@@ -11,6 +11,11 @@ class PenjualanController extends Controller {
 
     public function index() {
 
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
+
         DB::table('penjualan')->get();
         $generatePNJ = DB::select("SELECT concat('PNJ','_',DATE_FORMAT(NOW(), '%d%m%Y'),'_',nomor) AS id_nota from (select case  when nomor IS NULL THEN '001' ELSE  nomor end  AS nomor  from (SELECT right(1000+(max(RIGHT(id_nota,3))+1),3) as nomor FROM `penjualan` where tgl_masuk = CURRENT_DATE) abc) bca");
         foreach ($generatePNJ as $value) {
@@ -42,6 +47,10 @@ class PenjualanController extends Controller {
 
     public function kasir_detail()
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
        
         $data = DB::select( DB::raw("SELECT * from penjualan order by tgl_masuk desc")); 
         $pemasukan = DB::select( DB::raw("SELECT sum(total_harga)as pemasukan FROM penjualan"));
@@ -94,7 +103,10 @@ class PenjualanController extends Controller {
 
     public function kasir_detail_sort(Request $request)
     {
-        
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
         $tanggal1 = $request->tanggal1;
         $tanggal2 = $request->tanggal2;
 
@@ -146,12 +158,17 @@ class PenjualanController extends Controller {
 
     public function kasir_detail_list($id_nota)
     {
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
         $data = DB::select( DB::raw("SELECT * from detail_penjualan where id_nota ='$id_nota'"));
         $data2 = DB::select( DB::raw("SELECT total_harga from penjualan where id_nota ='$id_nota'"));
+        $data3 = DB::select( DB::raw("SELECT * from penjualan where id_nota ='$id_nota'"));
 
          
         // dd($laba);
-        return view ('kasir/penjualan/detail',['data'=>$data,'data2'=>$data2]);   
+        return view ('kasir/penjualan/detail',['data'=>$data,'data2'=>$data2,'data3'=>$data3]);   
     }
 
     public function create() {
@@ -200,7 +217,13 @@ class PenjualanController extends Controller {
         return 'ok';
     }
 
-    public function edit($kode_barang) {
+    public function edit($kode_barang) 
+    {
+
+        if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
         //  
         $detail = \App\detail_penjualan::where('id_nota',$id_nota)->get();
         return json_encode($detail);

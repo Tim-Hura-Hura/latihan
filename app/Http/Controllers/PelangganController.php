@@ -12,6 +12,10 @@ class PelangganController extends Controller
 
 public function index()
 	{
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 
 		$no_urut = DB::select( DB::raw("SELECT concat(nomor) AS no_urut from(select case  when nomor IS NULL THEN '1' ELSE  nomor end  AS nomor  from (SELECT MAX(id+1) as nomor FROM `pelanggan`) abc) bca"));		
 		$data = DB::table('tempat_servis')->where('status','KOSONG')->get();
@@ -65,6 +69,10 @@ public function ajaxGenerateDataNopol($id){
 
 public function detail_pelanggan()
 	{
+		if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('pelanggan')->get();
 		return view('kasir/pelanggan/detail_pelanggan',['data'=>$data]);
 	}
@@ -127,6 +135,10 @@ public function detail_pelanggan()
 
 public function edit($id)
     {
+    	if(!Session::get('login'))
+             {
+            return redirect('login');
+             }
 		$data = DB::table('pelanggan')->where('id',$id)->get();
 		return view ('kasir/pelanggan/edit',['data'=>$data]);   
     }
