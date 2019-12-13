@@ -61,7 +61,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="card-number" class="form-label">Harga Jual</label>
-                                                                    <input id="harga_jual" name="harga_jual" type="number" class="form-control">
+                                                                    <input id="harga_jual" name="harga_jual" type="number" class="form-control" readonly="">
                                                                 </div>
                                                                
                                                                 <div class="form-group">
